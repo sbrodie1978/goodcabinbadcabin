@@ -1,0 +1,77 @@
+# Good Cabin Bad Cabin
+
+A private cruise-cabin scoring tool for the **Princess Cruises fleet** (17 ships,
+~27,500 staterooms). It rates every cabin on four dimensions — Quietness, Motion,
+Convenience, and Space & comfort — across five traveller profiles, and shows a
+visual cross-section of what sits directly above, below, and either side of each
+cabin. Scores are derived purely from cabin position and official cabin data — no
+reviews, no opinions.
+
+Built by Stuart Brodie for personal use. Data comes from Princess Cruises' own
+public deck-plan API, used with Princess's permission. **Private repository — the
+underlying cabin data is not licensed for redistribution.**
+
+## Repository layout
+
+    data-source/
+      princess_fleet_all.json   # raw harvested fleet data (17 ships, full detail + geometry)
+    pipeline/
+      fleet_classes.py          # per-class deck stacks + venue zone maps
+      fleet_build.py            # scores every cabin -> fleet_scored.json
+      make_payload.py           # builds per-ship data files + metadata for the app
+      build_frontend.py         # builds the app shell (app/public/index.html)
+    app/
+      public/
+        index.html              # the app (lazy-loads ship data on demand)
+        data/ship-N.json        # one file per ship, fetched when selected
+        _headers                # Cloudflare cache headers
+      wrangler.toml
+      package.json
+    archive/                    # superseded PDF/OCR-era scripts, kept for provenance
+
+## Rebuilding everything from source
+
+    cd pipeline
+    python3 fleet_build.py       # raw data -> scored cabins
+    python3 make_payload.py      # -> app/public/data/ship-*.json + fleet_meta.json
+    python3 build_frontend.py    # -> app/public/index.html
+
+Requires Python 3 with `statistics` (stdlib). No third-party packages.
+
+## Deploying (Cloudflare Pages)
+
+    cd app
+    npx wrangler pages deploy public --project-name=goodcabinbadcabin
+
+Live at https://goodcabinbadcabin.pages.dev
+
+## Ship IDs
+
+1 Sun · 2 Star · 3 Royal · 4 Regal · 5 Majestic · 6 Sky · 7 Enchanted ·
+8 Discovery · 9 Caribbean · 10 Crown · 11 Emerald · 12 Ruby · 13 Grand ·
+14 Diamond · 15 Sapphire · 16 Coral · 17 Island
+
+## Refreshing a ship after a refit
+
+Ships are harvested from Princess's deck-plan API. Each ship has a two-letter code
+and a version number (see the ship's deck-plan page "when are you sailing" gate for
+the current version). Re-harvest that ship's decks into `data-source/`, then re-run
+the three pipeline steps. Ship codes and versions are documented in
+`pipeline/HARVEST.md`.
+
+## Scoring model (summary)
+
+- **Quietness** — starts at 100, penalised by what's above/below (venues, pools,
+  galleys), proximity to lift lobbies and laundromats, and bow/stern position on the
+  lowest cabin deck.
+- **Motion** — asymmetric: midship-to-slightly-aft is ideal; the bow is penalised
+  hardest; aft is treated as genuinely calmer than the bow. Higher decks feel more.
+- **Convenience** — distance to lifts, laundry, and key venue decks. Softened for
+  suites (priority everything + private lounges).
+- **Space & comfort** — from category class, square footage, and balcony size.
+- **Verdict** — an objective quality read (weighted toward space) with a lift so a
+  genuinely excellent cabin never reads "bad" over one middling axis. Profiles
+  re-weight for personal priorities.
+
+Above/below neighbours are computed from real deck geometry — Royal-class decks do
+not stack 1:1 by cabin number, and the tool captures that correctly.

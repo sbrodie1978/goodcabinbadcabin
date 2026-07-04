@@ -1,0 +1,450 @@
+import os
+import json
+
+DATA = open("fleet_meta.json").read()
+
+HTML = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Good Cabin Bad Cabin — cruise cabin ratings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Azeret+Mono:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#122740; --ink2:#31465e; --paper:#eef1ec; --card:#f7f8f5; --line:#c3ccc6;
+  --good:#1e7f6b; --mid:#c9a227; --poor:#c4472f; --accent:#0e5a8a;
+  --mono:'Azeret Mono',monospace; --sans:'Hanken Grotesk',sans-serif; --disp:'Saira Stencil One',sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+header{border-bottom:2px solid var(--ink);padding:18px 0 14px}
+.brand{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink2)}
+.brand b{color:var(--ink)}
+h1{font-family:var(--disp);font-weight:400;font-size:clamp(34px,6vw,56px);line-height:1;text-transform:uppercase;letter-spacing:.02em;margin-top:8px}
+.spec{font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-top:6px;letter-spacing:.03em}
+
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;padding:20px 0 8px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+#q{font-family:var(--mono);font-size:20px;padding:9px 12px;border:2px solid var(--ink);background:#fff;width:200px;border-radius:0;color:var(--ink)}
+#q:focus{outline:3px solid var(--accent);outline-offset:1px}
+.seg{display:flex;border:2px solid var(--ink)}
+.seg button{font-family:var(--mono);font-size:12px;padding:10px 13px;background:#fff;border:0;border-right:1px solid var(--line);cursor:pointer;color:var(--ink)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.seg button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+select{font-family:var(--mono);font-size:13px;padding:10px;border:2px solid var(--ink);background:#fff;border-radius:0;color:var(--ink)}
+
+.striplabel{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin:16px 0 4px}
+#ship{width:100%;background:var(--card);border:1px solid var(--line);display:block}
+#ship .cab{cursor:pointer}
+#ship .cab:hover{stroke:var(--ink);stroke-width:1.5}
+#ship .decklab{font-family:var(--mono);font-size:9px;fill:var(--ink2)}
+.legend{display:flex;gap:16px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink2);padding:8px 0 4px}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px}
+
+.panel{border:2px solid var(--ink);background:#fff;margin:22px 0;display:none}
+.panel.open{display:block}
+.phead{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;border-bottom:1px solid var(--line);padding:16px 20px}
+.pnum{font-family:var(--disp);font-weight:400;font-size:46px;line-height:1;letter-spacing:.03em}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1.5px solid var(--ink);padding:3px 9px;text-transform:uppercase}
+.chip.warn{border-color:var(--mid);color:#7a6210}
+.ploc{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.pbody{display:grid;grid-template-columns:1.1fr .9fr;gap:0}
+@media(max-width:760px){.pbody{grid-template-columns:1fr}}
+.scores{padding:18px 20px;border-right:1px solid var(--line)}
+@media(max-width:760px){.scores{border-right:0;border-bottom:1px solid var(--line)}}
+.srow{margin-bottom:14px}
+.srow .t{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.bar{height:10px;background:var(--paper);border:1px solid var(--line);margin-top:4px}
+.bar i{display:block;height:100%}
+.ranks{font-family:var(--mono);font-size:12.5px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);color:var(--ink2)}
+.ranks b{color:var(--ink);font-weight:600}
+.stack{padding:18px 20px}
+.stack h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
+.lvl{border:1.5px solid var(--line);padding:9px 12px;font-size:13.5px;background:var(--card)}
+.lvl.me{border:2px solid var(--ink);background:#fff;font-family:var(--mono);font-weight:600}
+.lvl+.lvl{margin-top:-1.5px}
+.lvl .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);display:block}
+.xwrap{display:flex;flex-direction:column;gap:16px}
+.xvert{display:flex;flex-direction:column;gap:4px}
+.xrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
+.xside .xsidelab{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:5px}
+.xcell{position:relative;border-radius:7px;padding:7px 10px;display:flex;flex-direction:column;justify-content:center;
+  border:1.5px solid rgba(0,0,0,.18);overflow:hidden}
+.xcell.xme{border:2.5px solid var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.14);z-index:1}
+.xcell .xtag{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;line-height:1.3}
+.xcell .xlab{font-size:12.5px;font-weight:600;line-height:1.25;margin-top:1px}
+.xcell .xsub{font-family:var(--mono);font-size:9px;opacity:.85;margin-top:2px;line-height:1.2}
+.xcell.xme .xlab{font-family:var(--mono)}
+.xrow .xcell .xlab{font-size:11px}
+.xkey{font-family:var(--mono);font-size:9.5px;color:var(--ink2);margin-top:4px;line-height:1.6}
+.xkey i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin:0 2px 0 6px}
+.notes{font-size:13.5px;margin-top:14px;color:var(--ink2)}
+.notes b{color:var(--ink)}
+
+.lists{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:10px 0 40px}
+@media(max-width:760px){.lists{grid-template-columns:1fr}}
+.lists h2{font-family:var(--disp);font-size:22px;text-transform:uppercase;font-weight:400;letter-spacing:.03em;border-bottom:2px solid var(--ink);padding-bottom:5px;margin-bottom:8px}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px}
+td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#fff}
+.sc{font-weight:600}
+footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 40px;border-top:1px solid var(--line)}
+.linegrp{margin:20px 0}
+.linegrp h2{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:12px}
+.shipcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.shipcard{border:2px solid var(--ink);background:#fff;padding:18px;cursor:pointer;text-align:left}
+.shipcard:hover{background:var(--card)}
+.shipcard:focus-visible{outline:3px solid var(--accent)}
+.shipcard .nm{font-family:var(--disp);font-size:30px;text-transform:uppercase;letter-spacing:.02em}
+.shipcard .sp{font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:6px;letter-spacing:.04em}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-family:var(--mono);font-size:11.5px;padding:6px 9px;display:none;z-index:9;white-space:nowrap}
+.stripwrap{border:1px solid var(--line);background:var(--card);overflow-x:auto;-webkit-overflow-scrolling:touch}
+#ship{border:0;min-width:100%}
+.swipehint{display:none;font-family:var(--mono);font-size:10.5px;color:var(--ink2);letter-spacing:.08em;text-align:center;padding:6px 0}
+@media(max-width:640px){
+  h1{font-size:clamp(30px,9vw,40px)}
+  .controls{flex-direction:column;align-items:stretch;gap:12px;padding-top:14px}
+  .field{width:100%}
+  #q{width:100%;font-size:22px;padding:12px}
+  .seg{display:grid;grid-template-columns:1fr 1fr}
+  .seg button{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 8px;font-size:11.5px}
+  select{width:100%;padding:12px}
+  #ship{min-width:940px}
+  .swipehint{display:block}
+  .pnum{font-size:38px}
+  .phead{padding:14px 14px;gap:8px 14px}
+  .verdict{margin-left:0 !important;width:100%}
+  .scores,.stack{padding:14px}
+  .shipcards{grid-template-columns:1fr}
+  td,th{padding:8px 6px}
+}
+@media (prefers-reduced-motion:no-preference){.panel.open{animation:in .18s ease-out}}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand"><b>GOOD CABIN <span style="color:var(--poor)">BAD CABIN</span></b> · KNOW YOUR CABIN BEFORE YOU BOOK</div>
+  <h1 id="shipname">Choose your ship</h1>
+  <div class="spec" id="shipspec">SCORED FROM THE DECK PLANS — NOTHING ELSE</div>
+  <div id="changeship" style="display:none;margin-top:6px"><a href="#" onclick="picker();return false" style="font-family:var(--mono);font-size:12px">← change ship</a></div>
+</div></header>
+
+<div class="wrap" id="pickerview">
+  <div class="striplabel" style="margin-top:22px"><span>STEP 1 · CRUISE LINE</span><span></span><span>STEP 2 · SHIP</span></div>
+  <div id="lines"></div>
+</div>
+
+<div class="wrap" id="appview" style="display:none">
+  <div class="controls">
+    <div class="field"><label for="q">Cabin number</label>
+      <input id="q" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. C322" maxlength="7"></div>
+    <div class="field"><label>I care most about</label>
+      <div class="seg" role="group" aria-label="Ranking profile" id="profiles"></div></div>
+    <div class="field"><label for="cat">Cabin Category</label>
+      <select id="cat"><option value="">All categories</option></select></div>
+  </div>
+
+  <div class="striplabel"><span>◀ FORWARD</span><span>EVERY CABIN, COLOURED BY SCORE — CLICK ONE</span><span>AFT ▶</span></div>
+  <div class="stripwrap"><svg id="ship" viewBox="0 0 1040 330" role="img" aria-label="Ship map of all cabins coloured by score"></svg></div>
+  <div class="swipehint" aria-hidden="true">swipe sideways to explore the ship · tap any cabin</div>
+  <div class="legend">
+    <span><i style="background:#c4472f"></i>Poor</span>
+    <span><i style="background:#c9a227"></i>Fair</span>
+    <span><i style="background:#6fae62"></i>Good</span>
+    <span><i style="background:#1e7f6b"></i>Excellent</span>
+    <span style="margin-left:auto">P = port (top lane) · S = starboard</span>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+
+</div>
+<div id="tip"></div>
+
+<script>
+const SHIPS = __DATA__;
+// per ship: data rows = [num, deck, side, b, quiet, stab, conv, cat, conf, above, below, notes]
+const PROFILES = {
+  overall:{label:"Overall quality",w:[.25,.20,.15,.40]},
+  balanced:{label:"Balanced",w:[.32,.24,.24,.20]},
+  light_sleeper:{label:"Light sleeper",w:[.48,.16,.18,.18]},
+  motion_sensitive:{label:"Motion sensitive",w:[.18,.46,.18,.18]},
+  everything_nearby:{label:"Everything nearby",w:[.14,.12,.54,.20]}
+};
+const CLASSNAME = {S:"Suite",C:"Mini-suite",M:"Mini-suite",D:"Balcony",O:"Oceanview",I:"Interior"};
+let profile = "overall", catFilter = "", SHIP=null, DECKS=[], cabs=[], byNum={};
+
+async function loadShip(s){
+  SHIP=s; DECKS=s.decks; catFilter="";
+  if(!s.data){
+    document.getElementById("shipname").textContent="Loading "+s.name+"…";
+    try{ s.data = await fetch("data/ship-"+s.id+".json").then(r=>r.json()); }
+    catch(e){ document.getElementById("shipname").textContent="Couldn't load "+s.name; return; }
+  }
+  cabs=s.data.map(r=>({num:r[0],deck:r[1],side:r[2],b:r[3],q:r[4],st:r[5],cv:r[6],
+    cat:r[7],conf:r[8],above:r[9],below:r[10],notes:r[11],
+    sqft:r[12]||null,berths:r[13]||null,catname:r[14]||null,space:(r[15]!=null?r[15]:50),
+    color:r[16]||"#cfd6cf",sur:r[17]||null}));
+  byNum=Object.fromEntries(cabs.map(c=>[c.num,c]));
+  const qbox=document.getElementById("q");
+  if(qbox){qbox.value="";qbox.placeholder="e.g. "+cabs[Math.floor(cabs.length/2)].num;}
+  document.getElementById("shipname").textContent=s.name;
+  document.getElementById("shipspec").textContent=s.line.toUpperCase()+" · "+s.spec;
+  document.getElementById("changeship").style.display="block";
+  document.getElementById("pickerview").style.display="none";
+  document.getElementById("appview").style.display="block";
+  document.getElementById("panel").classList.remove("open");
+  document.getElementById("q").value="";
+  const sel=document.getElementById("cat");
+  sel.innerHTML='<option value="">All categories</option>';
+  const cats=[...new Set(cabs.map(c=>c.cat).filter(Boolean))].sort();
+  cats.forEach(k=>{const o=document.createElement("option");o.value=k;
+    o.textContent=`${k} — ${(SHIP.classes&&SHIP.classes[k[0]])||CLASSNAME[k[0]]||""}`;sel.appendChild(o);});
+  sel.parentElement.style.display=cats.length?"block":"none";
+  const H=30, vb=8+DECKS.length*(H+2)+4;
+  document.getElementById("ship").setAttribute("viewBox","0 0 1040 "+vb);
+  render();
+}
+function picker(){
+  document.getElementById("pickerview").style.display="block";
+  document.getElementById("appview").style.display="none";
+  document.getElementById("changeship").style.display="none";
+  document.getElementById("shipname").textContent="Choose your ship";
+  document.getElementById("shipspec").textContent="SCORED FROM THE DECK PLANS — NOTHING ELSE";
+}
+(function buildPicker(){
+  const lines={};
+  SHIPS.forEach(s=>{(lines[s.line]=lines[s.line]||[]).push(s)});
+  const host=document.getElementById("lines");
+  const CLASSORDER=["Sphere","Royal","Grand","Coral"];
+  const ordered=Object.keys(lines).sort((a,b)=>{
+    const ai=CLASSORDER.findIndex(c=>a.includes(c)), bi=CLASSORDER.findIndex(c=>b.includes(c));
+    return (ai<0?99:ai)-(bi<0?99:bi);
+  });
+  for(const ln of ordered){
+    const g=document.createElement("div");g.className="linegrp";
+    g.innerHTML=`<h2>${ln}</h2>`;
+    const grid=document.createElement("div");grid.className="shipcards";
+    lines[ln].forEach(s=>{
+      const b=document.createElement("button");b.className="shipcard";
+      b.innerHTML=`<div class="nm">${s.name}</div><div class="sp">${s.spec}</div>`;
+      b.onclick=()=>loadShip(s);
+      grid.appendChild(b);
+    });
+    g.appendChild(grid);host.appendChild(g);
+  }
+})();
+
+function score(c,p){
+  const w=PROFILES[p].w;
+  const sp=(c.space!=null?c.space:50);
+  let base=w[0]*c.q+w[1]*c.st+w[2]*c.cv+w[3]*sp;
+  // Quality lift: an excellent cabin (big/suite) shouldn't read "bad" over one middling axis.
+  // Blend 25% toward the cabin's best single attribute so standout cabins surface.
+  const best=Math.max(c.q,c.st,c.cv,sp);
+  return +(0.72*base+0.28*best).toFixed(1);
+}
+function ranks(p){
+  const all=[...cabs].sort((a,b)=>score(b,p)-score(a,p));
+  all.forEach((c,i)=>c._r=i+1);
+  const g={};
+  cabs.forEach(c=>{(g[c.cat]=g[c.cat]||[]).push(c)});
+  for(const k in g){g[k].sort((a,b)=>score(b,p)-score(a,p)).forEach((c,i)=>c._cr=i+1);}
+  return all;
+}
+function col(s){ // score -> colour
+  if(s>=85) return "#1e7f6b"; if(s>=72) return "#6fae62";
+  if(s>=58) return "#c9a227"; return "#c4472f";
+}
+
+// ---- profile buttons & category select ----
+const pWrap=document.getElementById("profiles");
+for(const k in PROFILES){
+  const b=document.createElement("button");
+  b.textContent=PROFILES[k].label; b.dataset.p=k;
+  b.setAttribute("aria-pressed",k===profile);
+  b.onclick=()=>{profile=k;[...pWrap.children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===k));render();};
+  pWrap.appendChild(b);
+}
+document.getElementById("cat").onchange=e=>{catFilter=e.target.value;render();};
+
+// ---- ship strip ----
+const svg=document.getElementById("ship"), tip=document.getElementById("tip");
+let HITMAP=[];
+function drawShip(){
+  svg.innerHTML=""; HITMAP=[];
+  const X0=52,X1=1024,H=30,PAD=4;
+  DECKS.forEach((d,i)=>{
+    const y=8+i*(H+2);
+    const lab=document.createElementNS(svg.namespaceURI,"text");
+    lab.setAttribute("x",8);lab.setAttribute("y",y+H/2+3);lab.setAttribute("class","decklab");
+    lab.textContent="DECK "+(+d);svg.appendChild(lab);
+    const row=cabs.filter(c=>c.deck===d);
+    row.forEach(c=>{
+      const x=X0+c.b*(X1-X0-8);
+      const laneY=c.side==="P"? y+PAD : y+H/2+1;
+      const r=document.createElementNS(svg.namespaceURI,"rect");
+      const dim=catFilter&&c.cat!==catFilter;
+      r.setAttribute("x",x);r.setAttribute("y",laneY);
+      r.setAttribute("width",6.4);r.setAttribute("height",H/2-PAD-1);
+      r.setAttribute("fill",dim?"#d6dcd6":col(score(c,profile)));
+      r.setAttribute("class","cab");r.setAttribute("tabindex",dim?-1:0);
+      r.setAttribute("aria-label",`Cabin ${c.num}`);
+      r.addEventListener("click",()=>show(c.num));
+      r.addEventListener("keydown",e=>{if(e.key==="Enter")show(c.num)});
+      r.addEventListener("mousemove",e=>{ if(dim)return;
+        tip.style.display="block";tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY-10)+"px";
+        tip.textContent=`${c.num} · ${c.cat||"?"} · ${score(c,profile)}`;});
+      r.addEventListener("mouseleave",()=>tip.style.display="none");
+      if(!dim) HITMAP.push({x:x+3.2,y:laneY+(H/2-PAD-1)/2,n:c.num});
+      svg.appendChild(r);
+    });
+  });
+}
+
+// forgiving tap: nearest cabin within 14 SVG units
+svg.addEventListener("click",e=>{
+  const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+  const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+  let best=null;
+  for(const h of HITMAP){const d=(h.x-p.x)**2+(h.y-p.y)**2;
+    if(d<196&&(best===null||d<best.d))best={d,n:h.n};}
+  if(best)show(best.n);
+});
+
+// ---- verdict panel ----
+function verdictWord(s){return s>=85?"GOOD CABIN":s>=72?"Decent cabin":s>=58?"Mixed bag":"BAD CABIN";}
+
+// Build a visual cross-section of what's around the cabin.
+// Cells are coloured by the SAME score scale as the rest of the app (red->green).
+// c.sur = [above, below, forward, aft]; each = [label, colorUnused, kind]
+function surroundSVG(c){
+  const s=c.sur;
+  if(!s){
+    return `<div class="lvl"><span class="tag">Above</span>${c.above}</div>
+            <div class="lvl me">${c.num}</div>
+            <div class="lvl"><span class="tag">Below</span>${c.below}</div>`;
+  }
+  const [above,below,fwd,aft]=s;
+  // resolve a neighbour cell to {label, color, sub, kind}
+  const resolve=(cellData,fallbackLabel)=>{
+    const [label,,kind]=cellData;
+    if(kind==="cabin"){
+      const nb=byNum[label];
+      if(nb){ const sc=score(nb,profile);
+        return {label, sub:(nb.catname||nb.cat||"")+" · scores "+sc, color:col(sc), kind:"cabin", sc}; }
+      return {label, sub:"cabin", color:"#9aa0a8", kind:"cabin"};
+    }
+    if(kind==="venue"){ return {label, sub:"not a cabin", color:"#6b7280", kind:"venue"}; }
+    return {label:"end of row", sub:"outer edge of the ship", color:"#c9c3b8", kind:"end"};
+  };
+  const meSc=score(c,profile);
+  const cell=(r,tag,big)=>{
+    const tc=(function(bg){const h=bg.replace("#","");if(h.length<6)return "#111";
+      const R=parseInt(h.slice(0,2),16),G=parseInt(h.slice(2,4),16),B=parseInt(h.slice(4,6),16);
+      return (0.299*R+0.587*G+0.114*B)>150?"#1a1a1a":"#fff";})(r.color);
+    const hatch = r.kind==="venue"
+      ? "background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.14) 0 6px,transparent 6px 12px);" : "";
+    const lab=(r.label||"").length>26?r.label.slice(0,25)+"…":r.label;
+    return `<div class="xcell${big?" xme":""}" style="background:${r.color};color:${tc};${hatch}">
+      <span class="xtag">${tag}</span>
+      <span class="xlab">${lab}</span>
+      <span class="xsub">${big?("your cabin · scores "+meSc):r.sub}</span>
+    </div>`;
+  };
+  const meCell={label:c.num+(c.catname?" · "+c.catname:""),color:col(meSc),kind:"cabin"};
+  return `
+  <div class="xwrap">
+    <div class="xvert">
+      ${cell(resolve(above),"Directly above")}
+      ${cell(meCell,"Your cabin",true)}
+      ${cell(resolve(below),"Directly below")}
+    </div>
+    <div class="xside">
+      <div class="xsidelab">Same deck ▸ forward &nbsp;·&nbsp; aft</div>
+      <div class="xrow">
+        ${cell(resolve(fwd),"◀ forward")}
+        ${cell(meCell,"you",true)}
+        ${cell(resolve(aft),"aft ▶")}
+      </div>
+    </div>
+    <div class="xkey">Cells coloured by score: <i style="background:#c4472f"></i>poor <i style="background:#c9a227"></i>fair <i style="background:#6fae62"></i>good <i style="background:#1e7f6b"></i>excellent · <i style="background:#6b7280"></i>not a cabin</div>
+  </div>`;
+}
+function show(num){
+  const c=byNum[num]; if(!c)return;
+  ranks(profile);
+  const p=document.getElementById("panel");
+  const catN=c.cat?cabs.filter(x=>x.cat===c.cat).length:0;
+  const sc=score(c,profile);
+  const noteTxt=c.notes.replace(/\(([-+]\d+)\)/g,"").replace(/;/g," · ");
+  p.innerHTML=`
+   <div class="phead">
+     <div class="pnum">${c.num}</div>
+     <span class="chip">${c.catname?c.catname:(c.cat?c.cat+" · "+((SHIP.classes&&SHIP.classes[c.cat[0]])||CLASSNAME[c.cat[0]]):"Category unknown")}</span>
+     ${c.conf==="guess"?'<span class="chip warn">category unverified</span>':""}
+     ${c.conf==="official"?'<span class="chip" style="background:var(--good);color:#fff">official data</span>':""}
+     ${c.sqft?`<span class="chip">${c.sqft} sq ft${c.berths?" · sleeps "+c.berths:""}</span>`:""}
+     <span class="ploc">DECK ${+c.deck} · ${c.side==="P"?"PORT":"STARBOARD"} · ${c.b<0.33?"FORWARD":c.b<0.62?"MIDSHIP":"AFT"}</span>
+     <span class="ploc verdict" style="margin-left:auto;font-weight:600;color:${sc>=72?"var(--good)":sc>=58?"#7a6210":"var(--poor)"}">${verdictWord(sc)} — ${sc}/100 (${PROFILES[profile].label.toLowerCase()})</span>
+   </div>
+   <div class="pbody">
+    <div class="scores">
+      ${[["Quietness",c.q],["Motion",c.st],["Convenience",c.cv],["Space & comfort",c.space]].map(([t,v])=>`
+        <div class="srow"><div class="t"><span>${t}</span><span>${v}</span></div>
+        <div class="bar"><i style="width:${v}%;background:${col(v)}"></i></div></div>`).join("")}
+      <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:-4px">All scores: higher is better. Motion 100 = you'll barely feel the sea.</div>
+      <div class="ranks">
+        ${c.cat?`<b>#${c._cr}</b> of ${catN} ${c.cat} cabins · `:""}<b>#${c._r}</b> of ${cabs.length} on the ship<br>for the ${PROFILES[profile].label.toLowerCase()} profile
+      </div>
+    </div>
+    <div class="stack">
+      <h3>What surrounds it</h3>
+      ${surroundSVG(c)}
+      <div class="notes"><b>Position notes:</b> ${noteTxt||"Nothing to flag."}</div>
+    </div>
+   </div>`;
+  p.classList.add("open");
+  p.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function render(){
+  drawShip();
+}
+document.getElementById("q").addEventListener("input",e=>{
+  const raw=e.target.value.trim().toUpperCase().replace(/\s+/g,"");
+  const v=raw.replace(/\D/g,"");
+  let hit=byNum[raw];
+  if(!hit&&SHIP){
+    if(SHIP.numstyle==="pad5") hit=byNum[v]||byNum["0"+v]||byNum[v.padStart(5,"0")];
+    else if(SHIP.numstyle==="sphere") hit=byNum[v];
+    else if(SHIP.numstyle==="prefix"){
+      hit=byNum[raw];
+      if(!hit&&v.length>=3){
+        const matches=cabs.filter(c=>c.num.replace(/\D/g,"")===v);
+        if(matches.length===1) hit=matches[0];
+      }
+    }
+    else if(v.length>=4) hit=byNum[v.slice(0,v.length-3)+"."+v.slice(-3)];
+  }
+  if(hit&&raw.length>=3)show(hit.num);
+});
+picker();
+</script>
+</body>
+</html>
+"""
+
+out = HTML.replace("__DATA__", DATA)
+_HERE=os.path.dirname(os.path.abspath(__file__));_OUT=os.path.join(os.path.dirname(_HERE),"app","public","index.html")
+open(_OUT,"w").write(out)
+import os
+print("written:", os.path.getsize(_OUT)//1024, "KB ->", _OUT)
