@@ -44,7 +44,8 @@ select{font-family:var(--mono);font-size:13px;padding:10px;border:2px solid var(
 
 .panel{border:2px solid var(--ink);background:#fff;margin:22px 0;display:none}
 .panel.open{display:block}
-.phead{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;border-bottom:1px solid var(--line);padding:16px 20px}
+.phead{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;border-bottom:1px solid var(--line);padding:16px 20px}
+.pmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pnum{font-family:var(--disp);font-weight:400;font-size:46px;line-height:1;letter-spacing:.03em}
 .chip{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1.5px solid var(--ink);padding:3px 9px;text-transform:uppercase}
 .chip.warn{border-color:var(--mid);color:#7a6210}
@@ -53,12 +54,27 @@ select{font-family:var(--mono);font-size:13px;padding:10px;border:2px solid var(
 @media(max-width:760px){.pbody{grid-template-columns:1fr}}
 .scores{padding:18px 20px;border-right:1px solid var(--line)}
 @media(max-width:760px){.scores{border-right:0;border-bottom:1px solid var(--line)}}
-.srow{margin-bottom:14px}
-.srow .t{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.bar{height:10px;background:var(--paper);border:1px solid var(--line);margin-top:4px}
+/* hero overall score — centred */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;border:2px solid var(--line);padding:16px;margin-bottom:18px}
+.hero .heronum{font-family:var(--disp);font-weight:400;font-size:66px;line-height:.82;letter-spacing:.01em}
+.hero .heroden{font-family:var(--mono);font-size:17px;font-weight:500;opacity:.55;margin-left:1px}
+.hero .herotxt{display:flex;flex-direction:column;gap:3px}
+.hero .heroverdict{font-family:var(--mono);font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.hero .heroprof{font-family:var(--mono);font-size:10.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.1em}
+/* per-dimension: big number, slim bar */
+.srow{margin-bottom:11px}
+.srow .t{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono)}
+.srow .t .sl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.srow .t .sv{font-size:21px;font-weight:600;line-height:1}
+.bar{height:4px;background:var(--paper);border:1px solid var(--line);margin-top:4px}
 .bar i{display:block;height:100%}
-.ranks{font-family:var(--mono);font-size:12.5px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);color:var(--ink2)}
-.ranks b{color:var(--ink);font-weight:600}
+.scorenote{font-family:var(--mono);font-size:10px;color:var(--ink2);letter-spacing:.02em;margin-top:2px}
+/* ranks: prominent numbers, centred */
+.ranks{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);text-align:center}
+.rankrow{display:flex;align-items:baseline;justify-content:center;gap:9px;margin-bottom:5px}
+.rankrow .rn{font-family:var(--disp);font-weight:400;font-size:30px;line-height:.9;color:var(--ink)}
+.rankrow .rl{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.ranks .rprof{font-family:var(--mono);font-size:10px;color:var(--ink2);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
 .stack{padding:18px 20px}
 .stack h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-bottom:10px}
 .lvl{border:1.5px solid var(--line);padding:9px 12px;font-size:13.5px;background:var(--card)}
@@ -81,6 +97,11 @@ select{font-family:var(--mono);font-size:13px;padding:10px;border:2px solid var(
 .xkey i{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin:0 2px 0 6px}
 .notes{font-size:13.5px;margin-top:14px;color:var(--ink2)}
 .notes b{color:var(--ink)}
+.copylink{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;margin-left:auto;
+  border:1.5px solid var(--line);background:#fff;color:var(--ink2);padding:5px 9px;cursor:pointer;border-radius:0}
+.copylink:hover{border-color:var(--ink);color:var(--ink)}
+.copylink.ok{border-color:var(--good);color:var(--good)}
+.copylink:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 
 .lists{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:10px 0 40px}
 @media(max-width:760px){.lists{grid-template-columns:1fr}}
@@ -103,6 +124,12 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
 #tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;font-family:var(--mono);font-size:11.5px;padding:6px 9px;display:none;z-index:9;white-space:nowrap}
 .stripwrap{border:1px solid var(--line);background:var(--card);overflow-x:auto;-webkit-overflow-scrolling:touch}
 #ship{border:0;min-width:100%}
+/* force an always-visible horizontal scrollbar so desktop mice can pan too
+   (macOS hides overlay scrollbars, which otherwise strands the aft cabins) */
+.stripwrap,.planwrap{scrollbar-width:thin;scrollbar-color:var(--ink2) var(--card)}
+.stripwrap::-webkit-scrollbar,.planwrap::-webkit-scrollbar{height:10px}
+.stripwrap::-webkit-scrollbar-track,.planwrap::-webkit-scrollbar-track{background:var(--card)}
+.stripwrap::-webkit-scrollbar-thumb,.planwrap::-webkit-scrollbar-thumb{background:var(--ink2);border:2px solid var(--card)}
 .swipehint{display:none;font-family:var(--mono);font-size:10.5px;color:var(--ink2);letter-spacing:.08em;text-align:center;padding:6px 0}
 @media(max-width:640px){
   h1{font-size:clamp(30px,9vw,40px)}
@@ -114,15 +141,41 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
   select{width:100%;padding:12px}
   #ship{min-width:940px}
   .swipehint{display:block}
-  .pnum{font-size:38px}
-  .phead{padding:14px 14px;gap:8px 14px}
-  .verdict{margin-left:0 !important;width:100%}
+  .pnum{font-size:44px}
+  .hero .heronum{font-size:60px}
+  .phead{flex-direction:column;align-items:center;text-align:center;padding:16px 14px;gap:11px}
+  .pmeta{justify-content:center}
+  .phead .copylink{margin-left:0}
   .scores,.stack{padding:14px}
   .shipcards{grid-template-columns:1fr}
   td,th{padding:8px 6px}
 }
 @media (prefers-reduced-motion:no-preference){.panel.open{animation:in .18s ease-out}}
 @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+
+/* view toggle + deck selector + deck-plan */
+.viewbar{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;margin:20px 0 4px}
+.viewtoggle button{font-size:11.5px;padding:9px 14px}
+.decksel{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.decksel .dlab{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);margin-right:2px}
+.decksel button{font-family:var(--mono);font-size:12px;padding:6px 10px;background:#fff;border:1.5px solid var(--line);cursor:pointer;color:var(--ink2)}
+.decksel button:hover{border-color:var(--ink);color:var(--ink)}
+.decksel button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.decksel button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.planwrap{border:1px solid var(--line);background:var(--card);overflow-x:auto;-webkit-overflow-scrolling:touch}
+#deckplan{display:block;min-width:100%;background:var(--card)}
+#deckplan .pcab{cursor:pointer;stroke:rgba(0,0,0,.28);stroke-width:.6;vector-effect:non-scaling-stroke}
+#deckplan .pcab:hover{stroke:var(--ink);stroke-width:1.6}
+#deckplan .pcab.sel{stroke:var(--ink);stroke-width:2.4}
+#deckplan .pcab.dim{opacity:.28}
+#deckplan .hull{fill:none;stroke:var(--line);stroke-width:1}
+#deckplan .sidelab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;fill:var(--ink2);text-transform:uppercase}
+.planempty{padding:26px 20px;font-family:var(--mono);font-size:12px;color:var(--ink2)}
+@media(max-width:640px){
+  #deckplan{min-width:820px}
+  .viewtoggle{display:flex;grid-template-columns:none}
+  .viewtoggle button{flex:1}
+}
 </style>
 </head>
 <body>
@@ -145,13 +198,22 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
       <input id="q" inputmode="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="e.g. C322" maxlength="7"></div>
     <div class="field"><label>I care most about</label>
       <div class="seg" role="group" aria-label="Ranking profile" id="profiles"></div></div>
-    <div class="field"><label for="cat">Cabin Category</label>
-      <select id="cat"><option value="">All categories</option></select></div>
+    <div class="field"><label for="cat">Cabin type</label>
+      <select id="cat"><option value="">All cabin types</option></select></div>
   </div>
 
-  <div class="striplabel"><span>◀ FORWARD</span><span>EVERY CABIN, COLOURED BY SCORE — CLICK ONE</span><span>AFT ▶</span></div>
-  <div class="stripwrap"><svg id="ship" viewBox="0 0 1040 330" role="img" aria-label="Ship map of all cabins coloured by score"></svg></div>
-  <div class="swipehint" aria-hidden="true">swipe sideways to explore the ship · tap any cabin</div>
+  <div class="viewbar">
+    <div class="seg viewtoggle" role="group" aria-label="Map view" id="viewtoggle">
+      <button data-v="plan" aria-pressed="true">Deck plan</button>
+      <button data-v="strip" aria-pressed="false">Whole-ship overview</button>
+    </div>
+    <div class="decksel" id="decksel" aria-label="Choose a deck"></div>
+  </div>
+
+  <div class="striplabel"><span>◀ FORWARD</span><span id="maptitle">EVERY CABIN, COLOURED BY SCORE — CLICK ONE</span><span>AFT ▶</span></div>
+  <div class="stripwrap" id="stripwrap" style="display:none"><svg id="ship" viewBox="0 0 1040 330" role="img" aria-label="Ship map of all cabins coloured by score"></svg></div>
+  <div class="planwrap" id="planwrap"><svg id="deckplan" viewBox="0 0 1000 220" role="img" aria-label="Deck plan of cabins coloured by score"></svg></div>
+  <div class="swipehint" aria-hidden="true">↔ scroll sideways to see the whole ship — bow to aft</div>
   <div class="legend">
     <span><i style="background:#c4472f"></i>Poor</span>
     <span><i style="background:#c9a227"></i>Fair</span>
@@ -169,7 +231,9 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
 
 <script>
 const SHIPS = [{"id": 1, "line": "Princess Cruises \u00b7 Sphere class", "name": "Sun Princess", "spec": "175,500 GT \u00b7 2,157 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "6", "5"], "numstyle": "sphere", "cls": "Sphere"}, {"id": 2, "line": "Princess Cruises \u00b7 Sphere class", "name": "Star Princess", "spec": "177,882 GT \u00b7 2,157 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "6", "5"], "numstyle": "sphere", "cls": "Sphere"}, {"id": 3, "line": "Princess Cruises \u00b7 Royal class", "name": "Royal Princess", "spec": "142,229 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 4, "line": "Princess Cruises \u00b7 Royal class", "name": "Regal Princess", "spec": "142,714 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 5, "line": "Princess Cruises \u00b7 Royal class", "name": "Majestic Princess", "spec": "143,700 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 6, "line": "Princess Cruises \u00b7 Royal class", "name": "Sky Princess", "spec": "145,281 GT \u00b7 1,843 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["18", "17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 7, "line": "Princess Cruises \u00b7 Royal class", "name": "Enchanted Princess", "spec": "145,281 GT \u00b7 1,840 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 8, "line": "Princess Cruises \u00b7 Royal class", "name": "Discovery Princess", "spec": "145,281 GT \u00b7 1,845 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["18", "17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 9, "line": "Princess Cruises \u00b7 Grand class", "name": "Caribbean Princess", "spec": "112,894 GT \u00b7 1,569 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 10, "line": "Princess Cruises \u00b7 Grand class", "name": "Crown Princess", "spec": "113,561 GT \u00b7 1,543 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 11, "line": "Princess Cruises \u00b7 Grand class", "name": "Emerald Princess", "spec": "113,561 GT \u00b7 1,544 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 12, "line": "Princess Cruises \u00b7 Grand class", "name": "Ruby Princess", "spec": "113,561 GT \u00b7 1,540 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 13, "line": "Princess Cruises \u00b7 Grand class", "name": "Grand Princess", "spec": "107,517 GT \u00b7 1,301 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 14, "line": "Princess Cruises \u00b7 Grand class", "name": "Diamond Princess", "spec": "115,875 GT \u00b7 1,351 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 15, "line": "Princess Cruises \u00b7 Grand class", "name": "Sapphire Princess", "spec": "115,875 GT \u00b7 1,337 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 16, "line": "Princess Cruises \u00b7 Coral class", "name": "Coral Princess", "spec": "91,627 GT \u00b7 1,000 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Coral"}, {"id": 17, "line": "Princess Cruises \u00b7 Coral class", "name": "Island Princess", "spec": "92,822 GT \u00b7 1,107 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "7", "6", "5"], "numstyle": "prefix", "cls": "Coral"}];
-// per ship: data rows = [num, deck, side, b, quiet, stab, conv, cat, conf, above, below, notes]
+const DV = "5e98c4e40b";  // data version — cache-busts ship JSON when the payload schema/content changes
+// per ship: data rows = [num, deck, side, b, quiet, stab, conv, cat, conf, above, below, notes,
+//   sqft, berths, catname, space, colour, surround, type]  (type = core cabin type at index 18)
 const PROFILES = {
   overall:{label:"Overall quality",w:[.25,.20,.15,.40]},
   balanced:{label:"Balanced",w:[.32,.24,.24,.20]},
@@ -177,20 +241,51 @@ const PROFILES = {
   motion_sensitive:{label:"Motion sensitive",w:[.18,.46,.18,.18]},
   everything_nearby:{label:"Everything nearby",w:[.14,.12,.54,.20]}
 };
-const CLASSNAME = {S:"Suite",C:"Mini-suite",M:"Mini-suite",D:"Balcony",O:"Oceanview",I:"Interior"};
-let profile = "overall", catFilter = "", SHIP=null, DECKS=[], cabs=[], byNum={};
+// core cabin types — the app groups, filters and ranks by these five, not the
+// granular sub-categories (Premium Oceanview, Deluxe Balcony, category codes, …)
+const TYPE_NAME = {interior:"Interior",oceanview:"Oceanview",balcony:"Balcony","mini-suite":"Mini-suite",suite:"Suite"};
+const TYPE_ORDER = ["interior","oceanview","balcony","mini-suite","suite"];
+let profile = "overall", typeFilter = "", SHIP=null, DECKS=[], cabs=[], byNum={}, curNum=null;
+let view = "plan", currentDeck = null;
 
-async function loadShip(s){
-  SHIP=s; DECKS=s.decks; catFilter="";
+// ---- URL state (shareable deep links: #shipId/cabin/profile) ----
+let _suppressHash=false;
+function setHash(h){ if(location.hash===h)return; _suppressHash=true; location.hash=h;
+  setTimeout(()=>{_suppressHash=false;},0); }
+function setProfileButtons(k){ profile=k;
+  [...pWrap.children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===k)); }
+async function route(){
+  const h=decodeURIComponent((location.hash||"").replace(/^#/,""));
+  if(!h){picker();return;}
+  const [idStr,num,prof]=h.split("/");
+  const s=SHIPS.find(x=>String(x.id)===idStr);
+  if(!s){picker();return;}
+  if(!SHIP||SHIP.id!==s.id) await loadShip(s,true);
+  if(prof&&PROFILES[prof]) setProfileButtons(prof);
+  if(num&&byNum[num]){ show(num,true); }
+  else { render(); document.getElementById("panel").classList.remove("open"); curNum=null; }
+}
+window.addEventListener("hashchange",()=>{ if(_suppressHash)return; route(); });
+function copyLink(btn){
+  const url=location.href, done=()=>{const t=btn.textContent;btn.textContent="✓ copied";
+    btn.classList.add("ok");setTimeout(()=>{btn.textContent=t;btn.classList.remove("ok");},1400);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done,()=>prompt("Copy this link:",url));
+  } else prompt("Copy this link:",url);
+}
+
+async function loadShip(s,fromRoute){
+  SHIP=s; DECKS=s.decks; typeFilter=""; curNum=null; currentDeck=null;
+  if(!fromRoute) setHash(String(s.id));
   if(!s.data){
     document.getElementById("shipname").textContent="Loading "+s.name+"…";
-    try{ s.data = await fetch("data/ship-"+s.id+".json").then(r=>r.json()); }
+    try{ s.data = await fetch("data/ship-"+s.id+".json?v="+DV).then(r=>r.json()); }
     catch(e){ document.getElementById("shipname").textContent="Couldn't load "+s.name; return; }
   }
   cabs=s.data.map(r=>({num:r[0],deck:r[1],side:r[2],b:r[3],q:r[4],st:r[5],cv:r[6],
     cat:r[7],conf:r[8],above:r[9],below:r[10],notes:r[11],
     sqft:r[12]||null,berths:r[13]||null,catname:r[14]||null,space:(r[15]!=null?r[15]:50),
-    color:r[16]||"#cfd6cf",sur:r[17]||null}));
+    color:r[16]||"#cfd6cf",sur:r[17]||null,type:r[18]||null}));
   byNum=Object.fromEntries(cabs.map(c=>[c.num,c]));
   const qbox=document.getElementById("q");
   if(qbox){qbox.value="";qbox.placeholder="e.g. "+cabs[Math.floor(cabs.length/2)].num;}
@@ -202,16 +297,17 @@ async function loadShip(s){
   document.getElementById("panel").classList.remove("open");
   document.getElementById("q").value="";
   const sel=document.getElementById("cat");
-  sel.innerHTML='<option value="">All categories</option>';
-  const cats=[...new Set(cabs.map(c=>c.cat).filter(Boolean))].sort();
-  cats.forEach(k=>{const o=document.createElement("option");o.value=k;
-    o.textContent=`${k} — ${(SHIP.classes&&SHIP.classes[k[0]])||CLASSNAME[k[0]]||""}`;sel.appendChild(o);});
-  sel.parentElement.style.display=cats.length?"block":"none";
+  sel.innerHTML='<option value="">All cabin types</option>';
+  const present=new Set(cabs.map(c=>c.type).filter(Boolean));
+  const types=TYPE_ORDER.filter(t=>present.has(t));
+  types.forEach(t=>{const o=document.createElement("option");o.value=t;o.textContent=TYPE_NAME[t];sel.appendChild(o);});
+  sel.parentElement.style.display=types.length>1?"block":"none";
   const H=30, vb=8+DECKS.length*(H+2)+4;
   document.getElementById("ship").setAttribute("viewBox","0 0 1040 "+vb);
   render();
 }
 function picker(){
+  setHash(""); SHIP=null; curNum=null;
   document.getElementById("pickerview").style.display="block";
   document.getElementById("appview").style.display="none";
   document.getElementById("changeship").style.display="none";
@@ -254,7 +350,7 @@ function ranks(p){
   const all=[...cabs].sort((a,b)=>score(b,p)-score(a,p));
   all.forEach((c,i)=>c._r=i+1);
   const g={};
-  cabs.forEach(c=>{(g[c.cat]=g[c.cat]||[]).push(c)});
+  cabs.forEach(c=>{(g[c.type]=g[c.type]||[]).push(c)});
   for(const k in g){g[k].sort((a,b)=>score(b,p)-score(a,p)).forEach((c,i)=>c._cr=i+1);}
   return all;
 }
@@ -269,13 +365,37 @@ for(const k in PROFILES){
   const b=document.createElement("button");
   b.textContent=PROFILES[k].label; b.dataset.p=k;
   b.setAttribute("aria-pressed",k===profile);
-  b.onclick=()=>{profile=k;[...pWrap.children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===k));render();};
+  b.onclick=()=>{profile=k;[...pWrap.children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.p===k));
+    if(curNum&&byNum[curNum])show(curNum);else render();};
   pWrap.appendChild(b);
 }
-document.getElementById("cat").onchange=e=>{catFilter=e.target.value;render();};
+document.getElementById("cat").onchange=e=>{typeFilter=e.target.value;render();};
 
 // ---- ship strip ----
 const svg=document.getElementById("ship"), tip=document.getElementById("tip");
+// only show the hover tooltip on devices that actually hover — on touch there is
+// no mouseleave to hide it, so it would stick to the screen after a tap.
+const CAN_HOVER = !(window.matchMedia && window.matchMedia("(hover: none)").matches);
+// let a vertical mouse-wheel pan the map horizontally (desktop mice can't drag
+// the scrollbar on macOS); releases to the page once an edge is reached.
+function enableWheelPan(el){ if(!el)return;
+  el.addEventListener("wheel",e=>{
+    if(el.scrollWidth<=el.clientWidth) return;
+    if(Math.abs(e.deltaX)>Math.abs(e.deltaY)) return;   // real horizontal input (trackpad) — leave it
+    const max=el.scrollWidth-el.clientWidth;
+    if((e.deltaY<0&&el.scrollLeft>0)||(e.deltaY>0&&el.scrollLeft<max-1)){
+      el.scrollLeft=Math.max(0,Math.min(max,el.scrollLeft+e.deltaY)); e.preventDefault();
+    }
+  },{passive:false});
+}
+enableWheelPan(document.getElementById("stripwrap"));
+enableWheelPan(document.getElementById("planwrap"));
+function updateHint(){
+  const hint=document.querySelector(".swipehint"); if(!hint)return;
+  const el=view==="strip"?document.getElementById("stripwrap"):document.getElementById("planwrap");
+  hint.style.display=(el&&el.scrollWidth>el.clientWidth+2)?"block":"none";
+}
+window.addEventListener("resize",updateHint);
 let HITMAP=[];
 function drawShip(){
   svg.innerHTML=""; HITMAP=[];
@@ -290,7 +410,7 @@ function drawShip(){
       const x=X0+c.b*(X1-X0-8);
       const laneY=c.side==="P"? y+PAD : y+H/2+1;
       const r=document.createElementNS(svg.namespaceURI,"rect");
-      const dim=catFilter&&c.cat!==catFilter;
+      const dim=typeFilter&&c.type!==typeFilter;
       r.setAttribute("x",x);r.setAttribute("y",laneY);
       r.setAttribute("width",6.4);r.setAttribute("height",H/2-PAD-1);
       r.setAttribute("fill",dim?"#d6dcd6":col(score(c,profile)));
@@ -298,14 +418,15 @@ function drawShip(){
       r.setAttribute("aria-label",`Cabin ${c.num}`);
       r.addEventListener("click",()=>show(c.num));
       r.addEventListener("keydown",e=>{if(e.key==="Enter")show(c.num)});
-      r.addEventListener("mousemove",e=>{ if(dim)return;
+      r.addEventListener("mousemove",e=>{ if(dim||!CAN_HOVER)return;
         tip.style.display="block";tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY-10)+"px";
-        tip.textContent=`${c.num} · ${c.cat||"?"} · ${score(c,profile)}`;});
+        tip.textContent=`${c.num} · ${c.type?TYPE_NAME[c.type]:"?"} · ${score(c,profile)}`;});
       r.addEventListener("mouseleave",()=>tip.style.display="none");
       if(!dim) HITMAP.push({x:x+3.2,y:laneY+(H/2-PAD-1)/2,n:c.num});
       svg.appendChild(r);
     });
   });
+  updateHint();
 }
 
 // forgiving tap: nearest cabin within 14 SVG units
@@ -338,7 +459,7 @@ function surroundSVG(c){
     if(kind==="cabin"){
       const nb=byNum[label];
       if(nb){ const sc=score(nb,profile);
-        return {label, sub:(nb.catname||nb.cat||"")+" · scores "+sc, color:col(sc), kind:"cabin", sc}; }
+        return {label, sub:(nb.type?TYPE_NAME[nb.type]:"")+" · scores "+sc, color:col(sc), kind:"cabin", sc}; }
       return {label, sub:"cabin", color:"#9aa0a8", kind:"cabin"};
     }
     if(kind==="venue"){ return {label, sub:"not a cabin", color:"#6b7280", kind:"venue"}; }
@@ -358,7 +479,7 @@ function surroundSVG(c){
       <span class="xsub">${big?("your cabin · scores "+meSc):r.sub}</span>
     </div>`;
   };
-  const meCell={label:c.num+(c.catname?" · "+c.catname:""),color:col(meSc),kind:"cabin"};
+  const meCell={label:c.num+(c.type?" · "+TYPE_NAME[c.type]:""),color:col(meSc),kind:"cabin"};
   return `
   <div class="xwrap">
     <div class="xvert">
@@ -377,31 +498,44 @@ function surroundSVG(c){
     <div class="xkey">Cells coloured by score: <i style="background:#c4472f"></i>poor <i style="background:#c9a227"></i>fair <i style="background:#6fae62"></i>good <i style="background:#1e7f6b"></i>excellent · <i style="background:#6b7280"></i>not a cabin</div>
   </div>`;
 }
-function show(num){
+function show(num,fromRoute){
   const c=byNum[num]; if(!c)return;
+  curNum=num; tip.style.display="none";
+  if(!fromRoute) setHash(SHIP.id+"/"+num+(profile!=="overall"?"/"+profile:""));
   ranks(profile);
   const p=document.getElementById("panel");
-  const catN=c.cat?cabs.filter(x=>x.cat===c.cat).length:0;
+  const typeN=c.type?cabs.filter(x=>x.type===c.type).length:0;
   const sc=score(c,profile);
+  const scTxt=sc>=72?"var(--good)":sc>=58?"#8a6d12":"var(--poor)"; // legible text tone for the score
   const noteTxt=c.notes.replace(/\(([-+]\d+)\)/g,"").replace(/;/g," · ");
   p.innerHTML=`
    <div class="phead">
      <div class="pnum">${c.num}</div>
-     <span class="chip">${c.catname?c.catname:(c.cat?c.cat+" · "+((SHIP.classes&&SHIP.classes[c.cat[0]])||CLASSNAME[c.cat[0]]):"Category unknown")}</span>
-     ${c.conf==="guess"?'<span class="chip warn">category unverified</span>':""}
-     ${c.conf==="official"?'<span class="chip" style="background:var(--good);color:#fff">official data</span>':""}
-     ${c.sqft?`<span class="chip">${c.sqft} sq ft${c.berths?" · sleeps "+c.berths:""}</span>`:""}
-     <span class="ploc">DECK ${+c.deck} · ${c.side==="P"?"PORT":"STARBOARD"} · ${c.b<0.33?"FORWARD":c.b<0.62?"MIDSHIP":"AFT"}</span>
-     <span class="ploc verdict" style="margin-left:auto;font-weight:600;color:${sc>=72?"var(--good)":sc>=58?"#7a6210":"var(--poor)"}">${verdictWord(sc)} — ${sc}/100 (${PROFILES[profile].label.toLowerCase()})</span>
+     <div class="pmeta">
+       <span class="chip">${c.type?TYPE_NAME[c.type]:"Type unknown"}</span>
+       ${c.sqft?`<span class="chip">${c.sqft} sq ft${c.berths?" · sleeps "+c.berths:""}</span>`:""}
+       ${c.conf==="guess"?'<span class="chip warn">type unverified</span>':""}
+     </div>
+     <div class="ploc">DECK ${+c.deck} · ${c.side==="P"?"PORT":"STARBOARD"} · ${c.b<0.33?"FORWARD":c.b<0.62?"MIDSHIP":"AFT"}</div>
+     <button class="copylink" onclick="copyLink(this)" title="Copy a link straight to this cabin">🔗 copy link</button>
    </div>
    <div class="pbody">
     <div class="scores">
+      <div class="hero">
+        <div class="heronum" style="color:${scTxt}">${sc}<span class="heroden">/100</span></div>
+        <div class="herotxt">
+          <div class="heroverdict" style="color:${scTxt}">${verdictWord(sc)}</div>
+          <div class="heroprof">${PROFILES[profile].label} profile</div>
+        </div>
+      </div>
       ${[["Quietness",c.q],["Motion",c.st],["Convenience",c.cv],["Space & comfort",c.space]].map(([t,v])=>`
-        <div class="srow"><div class="t"><span>${t}</span><span>${v}</span></div>
+        <div class="srow"><div class="t"><span class="sl">${t}</span><b class="sv" style="color:${col(v)}">${v}</b></div>
         <div class="bar"><i style="width:${v}%;background:${col(v)}"></i></div></div>`).join("")}
-      <div style="font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:-4px">All scores: higher is better. Motion 100 = you'll barely feel the sea.</div>
+      <div class="scorenote">Higher is better · Motion 100 = you'll barely feel the sea</div>
       <div class="ranks">
-        ${c.cat?`<b>#${c._cr}</b> of ${catN} ${c.cat} cabins · `:""}<b>#${c._r}</b> of ${cabs.length} on the ship<br>for the ${PROFILES[profile].label.toLowerCase()} profile
+        ${c.type?`<div class="rankrow"><span class="rn">#${c._cr}</span><span class="rl">of ${typeN} ${TYPE_NAME[c.type].toLowerCase()} cabins</span></div>`:""}
+        <div class="rankrow"><span class="rn">#${c._r}</span><span class="rl">of ${cabs.length} cabins shipwide</span></div>
+        <div class="rprof">ranked for the ${PROFILES[profile].label.toLowerCase()} profile</div>
       </div>
     </div>
     <div class="stack">
@@ -412,10 +546,100 @@ function show(num){
    </div>`;
   p.classList.add("open");
   p.scrollIntoView({behavior:"smooth",block:"nearest"});
+  if(view==="plan") syncPlanToCabin(c);
 }
 
+// ---- deck plan view (real cabin footprints, one deck at a time) ----
+const dplan=document.getElementById("deckplan");
+async function ensurePlan(){
+  if(SHIP.plan) return true;
+  try{ SHIP.plan=await fetch("data/ship-"+SHIP.id+"-plan.json?v="+DV).then(r=>{if(!r.ok)throw 0;return r.json();}); }
+  catch(e){ SHIP.plan=null; return false; }
+  return true;
+}
+function planDecks(){ return DECKS.filter(d=>SHIP.plan&&SHIP.plan.decks[String(+d)]); }
+function defaultDeck(){
+  if(curNum&&byNum[curNum]){const d=String(+byNum[curNum].deck); if(SHIP.plan.decks[d])return d;}
+  let best=null,bn=-1;
+  for(const d of planDecks()){const n=Object.keys(SHIP.plan.decks[String(+d)].cab).length; if(n>bn){bn=n;best=String(+d);}}
+  return best;
+}
+function buildDeckSel(){
+  const host=document.getElementById("decksel"); host.innerHTML="";
+  const lab=document.createElement("span");lab.className="dlab";lab.textContent="Deck";host.appendChild(lab);
+  planDecks().forEach(d=>{
+    const dd=String(+d), b=document.createElement("button");
+    b.textContent=(+d); b.dataset.d=dd; b.setAttribute("aria-pressed",dd===currentDeck);
+    b.onclick=()=>{currentDeck=dd; buildDeckSel(); drawPlan(dd);
+      document.getElementById("maptitle").textContent="DECK "+(+dd)+" — TAP ANY CABIN";};
+    host.appendChild(b);
+  });
+}
+function drawPlan(deck){
+  const D=SHIP.plan&&SHIP.plan.decks[String(+deck)];
+  dplan.innerHTML="";
+  if(!D){ dplan.setAttribute("viewBox","0 0 1000 120");
+    const t=document.createElementNS(dplan.namespaceURI,"text");
+    t.setAttribute("x",20);t.setAttribute("y",60);t.setAttribute("class","sidelab");
+    t.textContent="No deck-plan geometry for this deck."; dplan.appendChild(t); return; }
+  const PADY=18, W=D.w, H=D.h+PADY*2;
+  dplan.setAttribute("viewBox","0 0 "+W+" "+H);
+  const mk=(x,y,txt)=>{const t=document.createElementNS(dplan.namespaceURI,"text");
+    t.setAttribute("x",x);t.setAttribute("y",y);t.setAttribute("class","sidelab");t.textContent=txt;dplan.appendChild(t);};
+  mk(6,13,"PORT ▲"); mk(6,H-5,"STARBOARD ▼");
+  for(const num in D.cab){
+    const c=byNum[num]; if(!c) continue;
+    const pts=D.cab[num]; let s="";
+    for(let i=0;i<pts.length;i+=2){ s+=pts[i]+","+(pts[i+1]+PADY)+" "; }
+    const sc=score(c,profile), dim=typeFilter&&c.type!==typeFilter;
+    const poly=document.createElementNS(dplan.namespaceURI,"polygon");
+    poly.setAttribute("points",s.trim());
+    poly.setAttribute("fill",dim?"#d6dcd6":col(sc));
+    poly.setAttribute("class","pcab"+(dim?" dim":"")+(num===curNum?" sel":""));
+    poly.setAttribute("tabindex",dim?-1:0);
+    poly.setAttribute("aria-label","Cabin "+num);
+    if(!dim){
+      poly.addEventListener("click",()=>show(num));
+      poly.addEventListener("keydown",e=>{if(e.key==="Enter")show(num)});
+      poly.addEventListener("mousemove",e=>{if(!CAN_HOVER)return;tip.style.display="block";
+        tip.style.left=(e.clientX+12)+"px";tip.style.top=(e.clientY-10)+"px";
+        tip.textContent=num+" · "+(c.type?TYPE_NAME[c.type]:"?")+" · "+sc;});
+      poly.addEventListener("mouseleave",()=>tip.style.display="none");
+    }
+    dplan.appendChild(poly);
+  }
+  if(curNum){const sp=dplan.querySelector(".pcab.sel"); if(sp)dplan.appendChild(sp);} // selected on top
+  updateHint();
+}
+async function drawPlanView(){
+  if(!(await ensurePlan())){ view="strip"; render(); return; }
+  if(!currentDeck||!SHIP.plan.decks[String(+currentDeck)]) currentDeck=defaultDeck();
+  buildDeckSel();
+  document.getElementById("maptitle").textContent="DECK "+(+currentDeck)+" — TAP ANY CABIN";
+  drawPlan(currentDeck);
+}
+async function syncPlanToCabin(c){
+  if(!(await ensurePlan())) return;
+  const d=String(+c.deck); if(!SHIP.plan.decks[d]) return;
+  currentDeck=d; buildDeckSel(); drawPlan(d);
+  document.getElementById("maptitle").textContent="DECK "+(+d)+" — TAP ANY CABIN";
+}
+document.getElementById("viewtoggle").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b||b.dataset.v===view)return;
+  view=b.dataset.v; render();
+});
+
 function render(){
-  drawShip();
+  const strip=document.getElementById("stripwrap"), pw=document.getElementById("planwrap"), dsel=document.getElementById("decksel");
+  [...document.querySelectorAll("#viewtoggle button")].forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===view));
+  if(view==="strip"){
+    strip.style.display="block"; pw.style.display="none"; dsel.style.display="none";
+    document.getElementById("maptitle").textContent="EVERY CABIN, COLOURED BY SCORE — CLICK ONE";
+    drawShip();
+  } else {
+    strip.style.display="none"; pw.style.display="block"; dsel.style.display="flex";
+    drawPlanView();
+  }
 }
 document.getElementById("q").addEventListener("input",e=>{
   const raw=e.target.value.trim().toUpperCase().replace(/\s+/g,"");
@@ -435,7 +659,7 @@ document.getElementById("q").addEventListener("input",e=>{
   }
   if(hit&&raw.length>=3)show(hit.num);
 });
-picker();
+route();
 </script>
 </body>
 </html>
