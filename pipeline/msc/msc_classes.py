@@ -38,6 +38,15 @@ CLASS_VENUE_DECKS = {
     "world":      {"buffet": 16, "pool": 16, "hub": 6,   # hub = World Galleria/Luna Park
                    "theatre": 6, "casino": 7, "spa": 8,
                    "lift_b": [0.60, 0.68]},              # panoramic lift banks sit aft
+    "musica":     {"buffet": 13, "pool": 13, "hub": 6,   # hub = shops/atrium
+                   "theatre": 6, "casino": 7, "spa": 14,
+                   "lift_b": [0.30, 0.62]},
+    "lirica":     {"buffet": 11, "pool": 11, "hub": 5,   # hub = reception/shops
+                   "theatre": 5, "casino": 6, "spa": 11,
+                   "lift_b": [0.28, 0.60]},
+    "fantasia":   {"buffet": 14, "pool": 14, "hub": 7,   # hub = deck-7 promenade
+                   "theatre": 6, "casino": 6, "spa": 14,
+                   "lift_b": [0.30, 0.62]},
 }
 
 # Per class, per public deck: list of (b0, b1, venue_class, name)
@@ -210,8 +219,93 @@ CLASS_ZONES = {
              (0.60, 0.90, "open_deck", "Aquapark upper / sports (open)")],
         22: [(0.14, 0.22, "pool_deck", "MSC Yacht Club Sundeck & Pool (top)")],
     },
-    # lirica / musica / fantasia: to be read from their PDFs with the same
-    # render-and-ruler method.
+    "musica": {
+        4:  [(0.22, 0.30, "public_general", "Medical Centre"),
+             (0.00, 1.00, "crew_service", "Crew / tender / service deck")],
+        5:  [(0.28, 0.54, "public_general", "Reception / Guest Services / Bar della Cascata"),
+             (0.60, 0.82, "dining", "L'Oleandro Restaurant"),
+             (0.82, 1.00, "crew_service", "Galley / crew (aft)")],
+        6:  [(0.13, 0.24, "venue_entertainment", "Teatro La Scala"),
+             (0.28, 0.34, "venue_entertainment", "Il Tucano Lounge"),
+             (0.34, 0.58, "public_general", "Shops, MSC Planet, Blue Velvet Bar, Mini Mall, Diamond Bar"),
+             (0.60, 0.66, "public_general", "MSC Travel Agency / Golden Bar"),
+             (0.66, 0.85, "dining", "Belle Epoque Restaurant")],
+        7:  [(0.13, 0.24, "venue_entertainment", "Teatro La Scala (upper)"),
+             (0.30, 0.40, "venue_entertainment", "Sanremo Casino"),
+             (0.40, 0.50, "public_general", "Sala Viola / Card Room / Library / Art Gallery"),
+             (0.50, 0.62, "dining", "Kaito Sushi Bar / Havana Club Cigar / Cyber Cafe"),
+             (0.62, 0.72, "public_general", "L'Enoteca Wine Bar / Photo Gallery"),
+             (0.85, 0.96, "venue_entertainment", "Crystal Lounge")],
+        # 8-12 cabin decks (12 has a small fwd Aurea Spa but scored as spa/public)
+        12: [(0.14, 0.25, "public_general", "MSC Aurea Spa (fwd)")],
+        13: [(0.14, 0.28, "public_general", "MSC Aurea Spa complex"),
+             (0.30, 0.55, "pool_deck", "Copacabana & La Spiaggia Pools, Blue Marlin Bar, whirlpools"),
+             (0.55, 0.75, "galley_buffet", "Buffet"),
+             (0.75, 0.90, "kids_play", "Children pool, indoor playroom, Junior/Teen Club"),
+             (0.90, 0.98, "venue_entertainment", "Q32 Disco (aft)")],
+        14: [(0.20, 0.34, "public_general", "MSC Aurea Spa / gym (fwd)"),
+             (0.55, 0.85, "open_deck", "Power walking track / Minigolf / Shuffleboard")],
+        # 15 cabin deck (Top 15 solarium fwd)
+        16: [(0.55, 0.80, "venue_entertainment", "Sport Center")],
+    },
+    "lirica": {
+        4:  [(0.00, 1.00, "crew_service", "Crew / tender / service deck")],
+        5:  [(0.14, 0.24, "venue_entertainment", "The Broadway Theatre"),
+             (0.26, 0.32, "public_general", "Lord Nelson Pub / Card Room / Library / Internet Cafe"),
+             (0.32, 0.42, "public_general", "Reception / Guest Services / Shore Excursion / shops"),
+             (0.44, 0.55, "public_general", "The Beverly Hills Bar / Shopping Arcade"),
+             (0.62, 0.82, "dining", "La Bussola Restaurant")],
+        6:  [(0.14, 0.24, "venue_entertainment", "The Broadway Theatre (upper)"),
+             (0.24, 0.30, "public_general", "The Coffee Corner"),
+             (0.34, 0.42, "venue_entertainment", "Le Cabaret / Lirica Vip Lounge"),
+             (0.42, 0.52, "venue_entertainment", "Las Vegas Casino"),
+             (0.50, 0.62, "public_general", "Kaito Sushi / L'Atmosphere Piano Bar / Video Games Arcade / Photo"),
+             (0.80, 0.98, "dining", "L'Ippocampo Restaurant")],
+        # 7-10 cabin decks
+        11: [(0.14, 0.22, "public_general", "MSC Aurea Spa: gym, thermal, salon (fwd)"),
+             (0.18, 0.24, "kids_play", "Mini Club / Baby Club (fwd)"),
+             (0.30, 0.55, "pool_deck", "Le Piscine pools, Italian Ice Cream & Pool bars, whirlpools"),
+             (0.55, 0.66, "kids_play", "Doremi Spray Park"),
+             (0.68, 0.82, "galley_buffet", "La Pergola / Le Bistrot Buffet"),
+             (0.82, 0.92, "venue_entertainment", "Young & Teens Club / Blue Note Disco (aft)")],
+        12: [(0.14, 0.30, "public_general", "MSC Aurea Spa / gym (fwd)"),
+             (0.55, 0.85, "open_deck", "Power walking track / Shuffleboard / Minigolf")],
+        13: [(0.55, 0.80, "open_deck", "Minigolf / Sun Deck")],
+    },
+    "fantasia": {
+        4:  [(0.50, 0.58, "public_general", "Medical Centre"),
+             (0.00, 1.00, "crew_service", "Crew / tender / service deck")],
+        5:  [(0.30, 0.42, "public_general", "Reception / Guest Services / Business Centre / Cyberlibrary"),
+             (0.42, 0.52, "public_general", "Il Gelato / Via Roma shops / Fantasia Bar"),
+             (0.55, 0.66, "public_general", "Shore Excursion / L'Angolo dell'Oggetto / La Caramella"),
+             (0.66, 0.82, "dining", "Red Velvet Restaurant")],
+        6:  [(0.13, 0.24, "venue_entertainment", "Teatro L'Avanguardia"),
+             (0.34, 0.46, "venue_entertainment", "Casino delle Palme"),
+             (0.46, 0.54, "public_general", "Video Games Arcade / Cigar Lounge / shops / Piazza San Giorgio"),
+             (0.55, 0.64, "public_general", "Le Vele / Le Vele Bar"),
+             (0.66, 0.82, "dining", "Red Velvet Restaurant (upper)"),
+             (0.86, 0.96, "dining", "Il Cerchio d'Oro Panoramic Restaurant")],
+        7:  [(0.13, 0.24, "venue_entertainment", "Teatro L'Avanguardia (upper)"),
+             (0.34, 0.46, "venue_entertainment", "Il Transatlantico Piano Bar / Gallery Plaza"),
+             (0.46, 0.56, "venue_entertainment", "Manhattan Bar / Sports Bar"),
+             (0.56, 0.66, "public_general", "Il Cappuccino Coffee Bar / La Pasticceria / Logo Shop / Photo"),
+             (0.66, 0.76, "dining", "La Cantina Toscana"),
+             (0.86, 0.96, "venue_entertainment", "L'Insolito Lounge (aft)")],
+        # 8-13 cabin decks
+        14: [(0.14, 0.30, "public_general", "MSC Aurea Spa complex (fwd)"),
+             (0.30, 0.55, "pool_deck", "I Tropici Covered Pool, Aqua Park, pool bars, whirlpools"),
+             (0.60, 0.95, "galley_buffet", "Zanzibar & L'Africana Buffets")],
+        15: [(0.14, 0.20, "public_general", "Top Sail Lounge (Yacht Club, quiet)"),
+             (0.30, 0.36, "public_general", "Yacht Club concierge"),
+             (0.55, 0.72, "kids_play", "Children's pool, Il Polo Nord, I Graffiti, Teen/Tobega"),
+             (0.82, 0.92, "dining", "MSC Yacht Club Dedicated Restaurant / Gaudi Bar"),
+             (0.90, 0.97, "pool_deck", "Lido Catalano Pool (aft)")],
+        16: [(0.14, 0.30, "public_general", "MSC Yacht Club Area (fwd)"),
+             (0.60, 0.70, "venue_entertainment", "Liquid Disco / Teen Club / Virtual World"),
+             (0.66, 0.82, "venue_entertainment", "4D Cinema / Formula Racer / MSC Arena Sport Center / Squash")],
+        18: [(0.14, 0.30, "pool_deck", "MSC Yacht Club: One Pool, whirlpool, One Bar"),
+             (0.55, 0.75, "open_deck", "Top 18 Exclusive Solariums / whirlpool")],
+    },
 }
 
 # MSC house rules (applied by the scorer; agreed with Stuart 5 Jul 2026)
