@@ -24,6 +24,13 @@ LEGEND_LI_RE = re.compile(r'<li id="([^"]+\|[^"]+\|#[0-9A-Fa-f]{6})">\s*<span[^>
 GUID_RE = re.compile(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
 HEX_RE = re.compile(r'^#[0-9A-Fa-f]{6}$')
 
+# Manual legend additions: categories present on the plans but absent from every
+# page legend. Identified via the official PDF legends (see HARVEST.md).
+MANUAL_LEGEND = {
+    "world": {"#003891": [{"group": "balcony", "slug": "deluxe-balcony-with-promenade-view",
+                            "name": "Deluxe Balcony with Promenade View"}]},
+}
+
 SHIP_CLASS = {
     "msc-armonia": "lirica", "msc-lirica": "lirica", "msc-opera": "lirica", "msc-sinfonia": "lirica",
     "msc-musica": "musica", "msc-orchestra": "musica", "msc-poesia": "musica", "msc-magnifica": "musica",
@@ -230,6 +237,9 @@ def main():
             for e in entries:
                 if not any(p["group"] == e["group"] and p["slug"] == e["slug"] for p in pool):
                     pool.append(e)
+    for cls, extra in MANUAL_LEGEND.items():
+        for colour, entries in extra.items():
+            class_legend.setdefault(cls, {}).setdefault(colour, []).extend(entries)
     fleet = {}
     print("%-22s %-6s %-7s %-9s %-9s %-6s %s" % (
         "ship", "decks", "cabins", "slug-ok", "grp-ok", "nocat", "unknown fills"))

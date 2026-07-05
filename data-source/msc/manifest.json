@@ -87,10 +87,10 @@
   },
   {
    "slug": "msc-poesia",
-   "deck_files": 11,
-   "cabin_decks": 7,
-   "cabins": 1013,
-   "bundles": 1
+   "deck_files": 12,
+   "cabin_decks": 8,
+   "cabins": 1247,
+   "bundles": 2
   },
   {
    "slug": "msc-preziosa",
@@ -170,5 +170,5 @@
    "bundles": 1
   }
  ],
- "total_cabins": 43912
+ "total_cabins": 44146
 }

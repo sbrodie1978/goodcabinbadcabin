@@ -112,8 +112,11 @@ Later bundle versions (-v2, -v3…) overwrite earlier ones per ship.
 24 ships, ~39,900 cabins. Complete except: **Magnifica deck 12
 (Portovenere)** — mid Yacht-Club refit (launches summer 2026), plan not yet
 published by MSC; re-check and re-harvest Magnifica when it appears.
-Poesia's viewer shows no deck 11 and totals ~1,013 vs ~1,275 published —
-reconcile against the PDF during pipeline build.
+Poesia RESOLVED 5 Jul 2026: the site viewer omits deck 11 (D'Annunzio)
+entirely, but `deck_11_d-annunzio.svg` exists in the DAM (found by probing
+poet names; 234 cabins, matching the PDF) — harvested as a v10 supplement
+bundle. Lesson: a viewer's deck-tab list is not authoritative; reconcile
+per-deck cabin counts against the PDF after any harvest.
 
 ## Extraction (parse_svgs.py)
 
@@ -123,11 +126,14 @@ number, deck, bbox geometry, fill, category slug(s) + group. Legend lis are
 machine-readable (`<li id="<group><guid>|<slug>|#HEX">`); resolution order is
 ship legend exact → ship nearest-colour (revision palette drift, e.g.
 #4CA66F/#4CA770) → pooled class legend. Status 5 Jul 2026: 97–100% of cabins
-resolve to a category group on every ship. Known residue: `#003891` (90
-cabins on each World-class ship, legend entry absent everywhere — identify
-via PDF and add an alias); a handful of fill-less/white cabins per ship
-(likely unsellable); within-group sibling ambiguity (deluxe-balcony vs
-partial-view; YC suite variants) is benign for scoring.
+resolve to a category group on every ship. Known residue: a handful of fill-less/white cabins per ship (likely
+unsellable); within-group sibling ambiguity (deluxe-balcony vs partial-view;
+YC suite variants) is benign for scoring. SOLVED 5 Jul 2026 via the PDF
+legends: `#003891` = **Deluxe Balcony with Promenade View** (code PR1, decks
+10-11, World class) — added as a MANUAL_LEGEND alias in parse_svgs.py. Note
+the PR2/PR3 promenade-view tiers (decks 12-16) may currently resolve as
+plain deluxe-balcony via nearest-colour; promenade-facing cabins are
+geometrically identifiable (centreline-adjacent) — verify during scoring.
 
 ## Geometry frame (in parse_svgs.py)
 
@@ -152,8 +158,9 @@ layer (per-cabin markers, id `icon<num>`) is captured with positions; icon
    disambiguate via the PDF legend's deck ranges).
 2. Venue zone maps per class → `fleet_classes.py`-style hand mapping,
    7 classes, PDF text layer as reference.
-3. Validate cabin counts per ship against the official PDFs; investigate
-   Poesia's gap; re-harvest Magnifica post-refit.
+3. Validate cabin counts per ship against the official PDFs
+   (msc_pdftext.json.gz makes this scriptable); re-harvest Magnifica
+   post-refit (deck 12 Portovenere still unpublished).
 4. **Permission**: Princess data is used with Princess's permission; the
    equivalent ask should go to MSC before `/msc/` is published. Deck plans
    are stated to be MSC's property.
