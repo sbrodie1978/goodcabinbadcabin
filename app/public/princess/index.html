@@ -1,9 +1,4 @@
-import os
-import json
-
-DATA = open("fleet_meta.json").read()
-
-HTML = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -173,7 +168,7 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
 <footer><div class="wrap">Independent tool made by a cruiser — not affiliated with or endorsed by Princess Cruises or any cruise line.<br>Part of <a href="https://thecruiselab.com">The Cruise Lab</a> · <a href="../">all cruise lines</a></div></footer>
 
 <script>
-const SHIPS = __DATA__;
+const SHIPS = [{"id": 1, "line": "Princess Cruises \u00b7 Sphere class", "name": "Sun Princess", "spec": "175,500 GT \u00b7 2,157 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "6", "5"], "numstyle": "sphere", "cls": "Sphere"}, {"id": 2, "line": "Princess Cruises \u00b7 Sphere class", "name": "Star Princess", "spec": "177,882 GT \u00b7 2,157 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "6", "5"], "numstyle": "sphere", "cls": "Sphere"}, {"id": 3, "line": "Princess Cruises \u00b7 Royal class", "name": "Royal Princess", "spec": "142,229 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 4, "line": "Princess Cruises \u00b7 Royal class", "name": "Regal Princess", "spec": "142,714 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 5, "line": "Princess Cruises \u00b7 Royal class", "name": "Majestic Princess", "spec": "143,700 GT \u00b7 1,780 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 6, "line": "Princess Cruises \u00b7 Royal class", "name": "Sky Princess", "spec": "145,281 GT \u00b7 1,843 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["18", "17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 7, "line": "Princess Cruises \u00b7 Royal class", "name": "Enchanted Princess", "spec": "145,281 GT \u00b7 1,840 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 8, "line": "Princess Cruises \u00b7 Royal class", "name": "Discovery Princess", "spec": "145,281 GT \u00b7 1,845 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["18", "17", "16", "15", "14", "12", "11", "10", "9", "8"], "numstyle": "prefix", "cls": "Royal"}, {"id": 9, "line": "Princess Cruises \u00b7 Grand class", "name": "Caribbean Princess", "spec": "112,894 GT \u00b7 1,569 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 10, "line": "Princess Cruises \u00b7 Grand class", "name": "Crown Princess", "spec": "113,561 GT \u00b7 1,543 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 11, "line": "Princess Cruises \u00b7 Grand class", "name": "Emerald Princess", "spec": "113,561 GT \u00b7 1,544 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 12, "line": "Princess Cruises \u00b7 Grand class", "name": "Ruby Princess", "spec": "113,561 GT \u00b7 1,540 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["15", "14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 13, "line": "Princess Cruises \u00b7 Grand class", "name": "Grand Princess", "spec": "107,517 GT \u00b7 1,301 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 14, "line": "Princess Cruises \u00b7 Grand class", "name": "Diamond Princess", "spec": "115,875 GT \u00b7 1,351 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 15, "line": "Princess Cruises \u00b7 Grand class", "name": "Sapphire Princess", "spec": "115,875 GT \u00b7 1,337 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "5"], "numstyle": "prefix", "cls": "Grand"}, {"id": 16, "line": "Princess Cruises \u00b7 Coral class", "name": "Coral Princess", "spec": "91,627 GT \u00b7 1,000 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["12", "11", "10", "9", "8", "6", "5"], "numstyle": "prefix", "cls": "Coral"}, {"id": 17, "line": "Princess Cruises \u00b7 Coral class", "name": "Island Princess", "spec": "92,822 GT \u00b7 1,107 STATEROOMS \u00b7 OFFICIAL DATA", "decks": ["14", "12", "11", "10", "9", "8", "7", "6", "5"], "numstyle": "prefix", "cls": "Coral"}];
 // per ship: data rows = [num, deck, side, b, quiet, stab, conv, cat, conf, above, below, notes]
 const PROFILES = {
   overall:{label:"Overall quality",w:[.25,.20,.15,.40]},
@@ -444,10 +439,3 @@ picker();
 </script>
 </body>
 </html>
-"""
-
-out = HTML.replace("__DATA__", DATA)
-_HERE=os.path.dirname(os.path.abspath(__file__));_OUT=os.path.join(os.path.dirname(_HERE),"app","public","princess","index.html")
-open(_OUT,"w").write(out)
-import os
-print("written:", os.path.getsize(_OUT)//1024, "KB ->", _OUT)

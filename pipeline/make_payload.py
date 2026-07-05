@@ -5,7 +5,7 @@ from collections import defaultdict
 import os
 _HERE=os.path.dirname(os.path.abspath(__file__))
 _ROOT=os.path.dirname(_HERE)
-_DATA=os.path.join(_ROOT,"app","public","data")
+_DATA=os.path.join(_ROOT,"app","public","princess","data")
 from fleet_classes import SHIP_CLASS, SHIP_META
 
 fleet=json.load(open("fleet_scored.json"))

@@ -1,4 +1,6 @@
-/data/*
+/princess/data/*
   Cache-Control: public, max-age=86400
-/index.html
+/
+  Cache-Control: public, max-age=300
+/princess/
   Cache-Control: public, max-age=300
