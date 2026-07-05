@@ -21,7 +21,7 @@
 <script>
 // akam-sw.js install script version 1.3.6
 "serviceWorker"in navigator&&"find"in[]&&function(){var e=new Promise(function(e){"complete"===document.readyState||!1?e():(window.addEventListener("load",function(){e()}),setTimeout(function(){"complete"!==document.readyState&&e()},1e4))}),n=window.akamServiceWorkerInvoked,r="1.3.6";if(n)aka3pmLog("akam-setup already invoked");else{window.akamServiceWorkerInvoked=!0,window.aka3pmLog=function(){window.akamServiceWorkerDebug&&console.log.apply(console,arguments)};function o(e){(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"sm.sw.s":e,"sm.sw.v":r}])}var i="/akam-sw.js",a=new Map;navigator.serviceWorker.addEventListener("message",function(e){var n,r,o=e.data;if(o.isAka3pm)if(o.command){var i=(n=o.command,(r=a.get(n))&&r.length>0?r.shift():null);i&&i(e.data.response)}else if(o.commandToClient)switch(o.commandToClient){case"enableDebug":window.akamServiceWorkerDebug||(window.akamServiceWorkerDebug=!0,aka3pmLog("Setup script debug enabled via service worker message"),v());break;case"boomerangMQ":o.payload&&(window.BOOMR_mq=window.BOOMR_mq||[]).push(o.payload)}aka3pmLog("akam-sw message: "+JSON.stringify(e.data))});var t=function(e){return new Promise(function(n){var r,o;r=e.command,o=n,a.has(r)||a.set(r,[]),a.get(r).push(o),navigator.serviceWorker.controller&&(e.isAka3pm=!0,navigator.serviceWorker.controller.postMessage(e))})},c=function(e){return t({command:"navTiming",navTiming:e})},s=null,m={},d=function(){var e=i;return s&&(e+="?othersw="+encodeURIComponent(s)),function(e,n){return new Promise(function(r,i){aka3pmLog("Registering service worker with URL: "+e),navigator.serviceWorker.register(e,n).then(function(e){aka3pmLog("ServiceWorker registration successful with scope: ",e.scope),r(e),o(1)}).catch(function(e){aka3pmLog("ServiceWorker registration failed: ",e),o(0),i(e)})})}(e,m)},g=navigator.serviceWorker.__proto__.register;if(navigator.serviceWorker.__proto__.register=function(n,r){return n.includes(i)?g.call(this,n,r):(aka3pmLog("Overriding registration of service worker for: "+n),s=new URL(n,window.location.href),m=r,navigator.serviceWorker.controller?new Promise(function(n,r){var o=navigator.serviceWorker.controller.scriptURL;if(o.includes(i)){var a=encodeURIComponent(s);o.includes(a)?(aka3pmLog("Cancelling registration as we already integrate other SW: "+s),navigator.serviceWorker.getRegistration().then(function(e){n(e)})):e.then(function(){aka3pmLog("Unregistering existing 3pm service worker"),navigator.serviceWorker.getRegistration().then(function(e){e.unregister().then(function(){return d()}).then(function(e){n(e)}).catch(function(e){r(e)})})})}else aka3pmLog("Cancelling registration as we already have akam-sw.js installed"),navigator.serviceWorker.getRegistration().then(function(e){n(e)})}):g.call(this,n,r))},navigator.serviceWorker.controller){var u=navigator.serviceWorker.controller.scriptURL;u.includes("/akam-sw.js")||u.includes("/akam-sw-preprod.js")||u.includes("/threepm-sw.js")||(aka3pmLog("Detected existing service worker. Removing and re-adding inside akam-sw.js"),s=new URL(u,window.location.href),e.then(function(){navigator.serviceWorker.getRegistration().then(function(e){m={scope:e.scope},e.unregister(),d()})}))}else e.then(function(){window.akamServiceWorkerPreprod&&(i="/akam-sw-preprod.js"),d()});if(window.performance){var w=window.performance.timing,l=w.responseEnd-w.responseStart;c(l)}e.then(function(){t({command:"pageLoad"})});var k=!1;function v(){window.akamServiceWorkerDebug&&!k&&(k=!0,aka3pmLog("Initializing debug functions at window scope"),window.aka3pmInjectSwPolicy=function(e){return t({command:"updatePolicy",policy:e})},window.aka3pmDisableInjectedPolicy=function(){return t({command:"disableInjectedPolicy"})},window.aka3pmDeleteInjectedPolicy=function(){return t({command:"deleteInjectedPolicy"})},window.aka3pmGetStateAsync=function(){return t({command:"getState"})},window.aka3pmDumpState=function(){aka3pmGetStateAsync().then(function(e){aka3pmLog(JSON.stringify(e,null,"\t"))})},window.aka3pmInjectTiming=function(e){return c(e)},window.aka3pmUpdatePolicyFromNetwork=function(){return t({command:"pullPolicyFromNetwork"})})}v()}}();</script>
-<script type="text/javascript" src="/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js" data-dtconfig="rid=RID_-188240485|rpid=-168421430|domain=msccruises.com|reportUrl=https://www.msccruises.com/int/rb_bf40443cna|app=451069a10ce96101|dsss=1|agentId=d33c1e24351aff04|cce=1|owasp=1|featureHash=ICA15789NPRTUVXfghqrtux|cux=1|srsr=0|xb=facebook.com^poutbrain.com^pfanplayr.com^pmarketo.com^pclarity.ms^psalecycle.com^pabtasty.com^ppinterest.com^pcriteo.com^pdoubleclick.net^panalytics.google.com^pgoogle-analytics.com^pgooglesyndication.com^pbat.bing.com^psmetrics^pgoogleadservices.com^pcontentsquare.net|rdnt=0|uxrgce=1|cuc=71l1fafh|mhl=2000|mel=100000|expw=1|md=mdcc1=bwindow.extensionGoogleDataLayer.dataLayerHelper.b.booking_id,mdcc2=bextensionGoogleDataLayer.dataLayerHelper.b.ecommerce.items[0].pax_id,mdcc3=bextensionGoogleDataLayer.dataLayerHelper.b.step_name,mdcc4=bs.pageName,mdcc5=bs.pageURL,mdcc6=bs.pageType,mdcc7=bs.purchaseID,mdcc8=bs.transactionID,mdcc9=bs.visitorID,mdcc10=bs.campaign,mdcc11=bs.channel,mdcc12=bs.events,mdcc13=dgclid,mdcc14=bdocument.referrer,mdcc15=bnavigator.userAgent,mdcc16=dutm_source,mdcc17=dutm_medium,mdcc18=dutm_campaign,mdcc19=dutm_term,mdcc20=dutm_content|lastModification=1783091390660|tp=500,50,0|srbbv=2|agentUri=/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js" data-config='{"revision":1783091390660,"beaconUri":"https://www.msccruises.com/int/rb_bf40443cna","agentUri":"/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js","environmentId":"71l1fafh","modules":"ICA15789NPRTUVXfghqrtux"}' data-envconfig='{"tracestateKeyPrefix":"a6dfc27f-d4acb8e8"}' data-appconfig='{"app":"451069a10ce96101","userInteractionCapture":["all"],"enableMetadataCapturing":false,"requestExclusions":"facebook.com|outbrain.com|fanplayr.com|marketo.com|clarity.ms|salecycle.com|abtasty.com|pinterest.com|criteo.com|doubleclick.net|analytics.google.com|google-analytics.com|googlesyndication.com|bat.bing.com|smetrics|googleadservices.com|contentsquare.net"}'></script><script type="application/ld+json">
+<script type="text/javascript" src="/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js" data-dtconfig="rid=RID_-188240485|rpid=766553505|domain=msccruises.com|reportUrl=https://www.msccruises.com/int/rb_bf40443cna|app=451069a10ce96101|dsss=1|agentId=3ff519a5be9f969b|cce=1|owasp=1|featureHash=ICA15789NPRTUVXfghqrtux|cux=1|srsr=0|xb=facebook.com^poutbrain.com^pfanplayr.com^pmarketo.com^pclarity.ms^psalecycle.com^pabtasty.com^ppinterest.com^pcriteo.com^pdoubleclick.net^panalytics.google.com^pgoogle-analytics.com^pgooglesyndication.com^pbat.bing.com^psmetrics^pgoogleadservices.com^pcontentsquare.net|rdnt=0|uxrgce=1|cuc=71l1fafh|mhl=2000|mel=100000|expw=1|md=mdcc1=bwindow.extensionGoogleDataLayer.dataLayerHelper.b.booking_id,mdcc2=bextensionGoogleDataLayer.dataLayerHelper.b.ecommerce.items[0].pax_id,mdcc3=bextensionGoogleDataLayer.dataLayerHelper.b.step_name,mdcc4=bs.pageName,mdcc5=bs.pageURL,mdcc6=bs.pageType,mdcc7=bs.purchaseID,mdcc8=bs.transactionID,mdcc9=bs.visitorID,mdcc10=bs.campaign,mdcc11=bs.channel,mdcc12=bs.events,mdcc13=dgclid,mdcc14=bdocument.referrer,mdcc15=bnavigator.userAgent,mdcc16=dutm_source,mdcc17=dutm_medium,mdcc18=dutm_campaign,mdcc19=dutm_term,mdcc20=dutm_content|lastModification=1783091390660|tp=500,50,0|srbbv=2|agentUri=/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js" data-config='{"revision":1783091390660,"beaconUri":"https://www.msccruises.com/int/rb_bf40443cna","agentUri":"/ruxitagentjs_ICA15789NPRTUVXfghqrtux_10339260603164134.js","environmentId":"71l1fafh","modules":"ICA15789NPRTUVXfghqrtux"}' data-envconfig='{"tracestateKeyPrefix":"a6dfc27f-d4acb8e8"}' data-appconfig='{"app":"451069a10ce96101","userInteractionCapture":["all"],"enableMetadataCapturing":false,"requestExclusions":"facebook.com|outbrain.com|fanplayr.com|marketo.com|clarity.ms|salecycle.com|abtasty.com|pinterest.com|criteo.com|doubleclick.net|analytics.google.com|google-analytics.com|googlesyndication.com|bat.bing.com|smetrics|googleadservices.com|contentsquare.net"}'></script><script type="application/ld+json">
     {
   "@context": "http://schema.org",
   "@type": "BreadcrumbList",
@@ -157,25 +157,25 @@ rtp('get', 'campaign',true);
    <link rel="alternate" hreflang="de-CH" href="https://www.msccruises.ch/de/kreuzfahrtschiffe/msc-virtuosa" />
    <link rel="alternate" hreflang="fr-CH" href="https://www.msccruises.ch/fr/navires/msc-virtuosa" />
    <link rel="alternate" hreflang="x-default" href="https://www.msccruises.com/int/our-cruises/ships/msc-virtuosa" />
-   <link rel="alternate" hreflang="en-ZA" href="https://www.msccruises.co.za/our-cruises/ships/msc-virtuosa" />
-   <link rel="alternate" hreflang="fr-FR" href="https://www.msccroisieres.fr/nos-croisieres/navires/msc-virtuosa" />
-   <link rel="alternate" hreflang="en-NZ" href="https://www.msccruises.co.nz/our-cruises/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="en-CA" href="https://www.msccruises.ca/en/plan-a-cruise/ships/msc-virtuosa" />
-   <link rel="alternate" hreflang="nl-NL" href="https://www.msccruises.nl/ontdek-msc/schepen/msc-virtuosa" />
+   <link rel="alternate" hreflang="en-NZ" href="https://www.msccruises.co.nz/our-cruises/ships/msc-virtuosa" />
+   <link rel="alternate" hreflang="fr-FR" href="https://www.msccroisieres.fr/nos-croisieres/navires/msc-virtuosa" />
+   <link rel="alternate" hreflang="en-ZA" href="https://www.msccruises.co.za/our-cruises/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="pt-BR" href="https://www.msccruzeiros.com.br/nossos-cruzeiros/navios/msc-virtuosa" />
+   <link rel="alternate" hreflang="nl-NL" href="https://www.msccruises.nl/ontdek-msc/schepen/msc-virtuosa" />
    <link rel="alternate" hreflang="en-FI" href="https://www.msccruises.fi/our-cruises/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="en-US" href="https://www.msccruisesusa.com/cruise/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="fr-BE" href="https://www.msccruises.be/fr/nos-croisieres/navires/msc-virtuosa" />
-   <link rel="alternate" hreflang="da-DK" href="https://www.msccruises.dk/our-cruises/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="nl-BE" href="https://www.msccruises.be/ontdek-msc/schepen/msc-virtuosa" />
+   <link rel="alternate" hreflang="da-DK" href="https://www.msccruises.dk/our-cruises/ships/msc-virtuosa" />
    <link rel="alternate" hreflang="fr-CA" href="https://www.msccruises.ca/fr/nos-croisieres/notre-flotte/msc-virtuosa" />
    <link rel="alternate" hreflang="sv-SE" href="https://www.msccruises.se/kryssningar/fartyg/msc-virtuosa" />
-   <link rel="alternate" hreflang="es" href="https://www.msccruceros.com/cruceros/barcos/msc-virtuosa" />
    <link rel="alternate" hreflang="en-AU" href="https://www.msccruises.com.au/our-cruises/ships/msc-virtuosa" />
+   <link rel="alternate" hreflang="es" href="https://www.msccruceros.com/cruceros/barcos/msc-virtuosa" />
    <link rel="alternate" hreflang="es-ES" href="https://www.msccruceros.es/cruceros/barcos/msc-virtuosa" />
    <link rel="alternate" hreflang="it-IT" href="https://www.msccrociere.it/crociere/navi-da-crociera/msc-virtuosa" />
-   <link rel="alternate" hreflang="pt-PT" href="https://www.msccruzeiros.pt/os-nossos-cruzeiros/navios/msc-virtuosa" />
    <link rel="alternate" hreflang="es-AR" href="https://www.msccruceros.com.ar/cruceros/barcos/msc-virtuosa" />
+   <link rel="alternate" hreflang="pt-PT" href="https://www.msccruzeiros.pt/os-nossos-cruzeiros/navios/msc-virtuosa" />
    <link rel="alternate" hreflang="nb-NO" href="https://www.msccruises.no/vare-cruise/skip/msc-virtuosa" />
     <script id="b2cAnalyticsTrackingData" type="text/javascript">
         window.analyticsTrackingData = {"PageCategory":"Our Cruises","PageSubCategory":"Ship Details","PageSubSubCategory":"Virtuosa","VirtualPageName":"/our-cruises/ships/msc-virtuosa/","VirtualPageTitle":"Msc virtuosa the new cruise ship","PageNameToOverride":""}
@@ -183,7 +183,7 @@ rtp('get', 'campaign',true);
 
 
 
-                                <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="SADS9-FNUKA-3BTPR-26AQ2-UZR73",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,_,o,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",o=document.getElementsByTagName("script")[0],o.parentNode.insertBefore(r,o);try{_=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",_=r.contentWindow.document}_.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"SADS9-FNUKA-3BTPR-26AQ2-UZR73",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},_.write("<bo"+'dy onload="document._l();">'),_.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e=""=="true"?1:0,t="",n="kiftlnfydha3g2sknola-f-053f43b73-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,_={"ak.v":"41","ak.cp":"367052","ak.ai":parseInt("229899",10),"ak.ol":"0","ak.cr":25,"ak.ipv":4,"ak.proto":"h2","ak.rid":"9d8e6237","ak.r":49151,"ak.a2":e,"ak.m":"x","ak.n":"essl","ak.cport":49632,"ak.gh":"2.18.30.204","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"","ak.t":"1783262102","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==dAqaHjigavAJK303cCqKYbwcfpfaSfBhz1pdbETiT1SgzeAiu7aUkQGMg5NZeCVeBXwuc7m3f3zw43X6NHqfPAykSn5asCO740ZOD/MMhSQNyAN67ICGdZGyMYyj0vhAfuEmXLj+ZyCibZ3lUZhOy+uAcOMCRXHHCRiDDPvsMfmhgKos7R79zgVEozgvLGif5emZBsww+q9sfveuoImu4bEmtZYvmaK3kaerFY3zeUCKzSV11inLp6QuxxMIx/0764HD1P3xJN+X1jafUbQJzoXXcP6tXk03DtirNDIfNH9feFTgSkxT1R8sWWmIs52dIBt0QDq++XQp47pIpxN3GeGCbXEPzjcD3zZ8d7YERHlwpXsiDR+hTmaBH6b50u0+0edk5uRCkS7HrUgJAqALdwuVF9LpXLQ98/BTTEvMNAU=","ak.pv":"263","ak.dpoabenc":"","ak.tf":i};if(""!==t)_["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))_["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(_)},rv:function(){var a=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:_,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+                                <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="SADS9-FNUKA-3BTPR-26AQ2-UZR73",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,_,o,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",o=document.getElementsByTagName("script")[0],o.parentNode.insertBefore(r,o);try{_=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",_=r.contentWindow.document}_.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"SADS9-FNUKA-3BTPR-26AQ2-UZR73",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},_.write("<bo"+'dy onload="document._l();">'),_.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e=""=="true"?1:0,t="",n="kiftlnaccvuzu2skoy4q-f-0f015cdb8-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,_={"ak.v":"41","ak.cp":"367052","ak.ai":parseInt("229899",10),"ak.ol":"0","ak.cr":19,"ak.ipv":4,"ak.proto":"h2","ak.rid":"adb5ea4","ak.r":49472,"ak.a2":e,"ak.m":"x","ak.n":"essl","ak.cport":49727,"ak.gh":"2.21.6.159","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"","ak.t":"1783264825","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==+enej5oPxCBO3ujkNHIuWsPnq3dvtHZtxnidXd7STKuX/rMrzK6EGHNuwrP20wWKUDK52q5dw2VkorlsHjZUo1BES9uJ2BsZA9RbLFGj3ayGSMsOORRa6a8IUjRzLN0yUUfSF5zWea43ZPyGpLNb2suIbUGICl2AufBXSpFJIR+G6x7rgDouCc3+B5QBJ91kfOQL3M1ipk/IsW85+V1/Z6IZ+aW/MJaf9TZ0SDo7OPurbQ/HrKjG0A+4kDyRR74Lgjla4RsiLdPqqOIG5UL10xUG8S4H+JWWdgHNobskN/le9eW/0qDe5TlljNL80eSUjhPqvSujFpYceuvGxSGnZslT09n+CKrGcNsvYkQ7Wl3gh4AbPWqeQWDhNHKscUtogP+BYpe9a8UmyTSNXtFmePMCuZRnisLX0+38ZW5Ol5o=","ak.pv":"263","ak.dpoabenc":"","ak.tf":i};if(""!==t)_["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))_["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(_)},rv:function(){var a=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:_,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
 <body data-template-name="unknown" data-preview-mode="false" id="outerContainer" class=" site-itl site-itl_live" data-market="itl_live">
             <!-- Google Tag Manager -->
             <noscript>
@@ -2140,7 +2140,7 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
         <span class="view-deckplan-btn" v-on:click="handleOpenMobileDeckPlanClick()" 
               style="background-color:; 
                      color:"></span>
-        <div class="ship-deckplan--wrp" id="ship-deckplan--wrp 914b639b-05db-441e-9995-ce6a99d01f65">
+        <div class="ship-deckplan--wrp" id="ship-deckplan--wrp 586661c3-0bd8-4c90-8b6a-ae7cb3de6d07">
             <div v-on:click="handleBackToShipClick()" class="ship-deckplan--wrp__back-btn">
                 <svg
                     class="ship-deckplan--wrp__back-btn-chevron"
@@ -2167,46 +2167,46 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 
 <div class="ship-deckplan--wrp--cicle__detail deckplan-year-0" v-bind:class="{ 'active' : activeYear === 0 }">
                         <ul class="ship-deckplan--wrp__numbers-list carousel-deckplan">
-                                    <li class="menu-deck-5343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 0 }" v-on:click="choseNumber(5, 0)">
+                                    <li class="menu-deck-5d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 0 }" v-on:click="choseNumber(5, 0)">
                                         <span>5.</span> Mozart
                                     </li>
-                                    <li class="menu-deck-6343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 1 }" v-on:click="choseNumber(6, 1)">
+                                    <li class="menu-deck-6d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 1 }" v-on:click="choseNumber(6, 1)">
                                         <span>6.</span> Beethoven
                                     </li>
-                                    <li class="menu-deck-7343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 2 }" v-on:click="choseNumber(7, 2)">
+                                    <li class="menu-deck-7d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 2 }" v-on:click="choseNumber(7, 2)">
                                         <span>7.</span> Verdi
                                     </li>
-                                    <li class="menu-deck-8343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 3 }" v-on:click="choseNumber(8, 3)">
+                                    <li class="menu-deck-8d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 3 }" v-on:click="choseNumber(8, 3)">
                                         <span>8.</span> Wagner
                                     </li>
-                                    <li class="menu-deck-9343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 4 }" v-on:click="choseNumber(9, 4)">
+                                    <li class="menu-deck-9d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 4 }" v-on:click="choseNumber(9, 4)">
                                         <span>9.</span> Strauss
                                     </li>
-                                    <li class="menu-deck-10343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 5 }" v-on:click="choseNumber(10, 5)">
+                                    <li class="menu-deck-10d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 5 }" v-on:click="choseNumber(10, 5)">
                                         <span>10.</span> Gershwin
                                     </li>
-                                    <li class="menu-deck-11343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 6 }" v-on:click="choseNumber(11, 6)">
+                                    <li class="menu-deck-11d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 6 }" v-on:click="choseNumber(11, 6)">
                                         <span>11.</span> Puccini
                                     </li>
-                                    <li class="menu-deck-12343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 7 }" v-on:click="choseNumber(12, 7)">
+                                    <li class="menu-deck-12d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 7 }" v-on:click="choseNumber(12, 7)">
                                         <span>12.</span> Paganini
                                     </li>
-                                    <li class="menu-deck-13343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 8 }" v-on:click="choseNumber(13, 8)">
+                                    <li class="menu-deck-13d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 8 }" v-on:click="choseNumber(13, 8)">
                                         <span>13.</span> Bizet
                                     </li>
-                                    <li class="menu-deck-14343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 9 }" v-on:click="choseNumber(14, 9)">
+                                    <li class="menu-deck-14d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 9 }" v-on:click="choseNumber(14, 9)">
                                         <span>14.</span> Tchaikovsky
                                     </li>
-                                    <li class="menu-deck-15343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 10 }" v-on:click="choseNumber(15, 10)">
+                                    <li class="menu-deck-15d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 10 }" v-on:click="choseNumber(15, 10)">
                                         <span>15.</span> Morricone
                                     </li>
-                                    <li class="menu-deck-16343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 11 }" v-on:click="choseNumber(16, 11)">
+                                    <li class="menu-deck-16d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 11 }" v-on:click="choseNumber(16, 11)">
                                         <span>16.</span> Debussy
                                     </li>
-                                    <li class="menu-deck-18343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 12 }" v-on:click="choseNumber(18, 12)">
+                                    <li class="menu-deck-18d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 12 }" v-on:click="choseNumber(18, 12)">
                                         <span>18.</span> Schumann
                                     </li>
-                                    <li class="menu-deck-19343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" v-bind:class="{ 'active' : activeIndex === 13 }" v-on:click="choseNumber(19, 13)">
+                                    <li class="menu-deck-19d6df1491-253e-4c21-badf-90aff1ca6649" v-bind:class="{ 'active' : activeIndex === 13 }" v-on:click="choseNumber(19, 13)">
                                         <span>19.</span> Mendelssohn
                                     </li>
                         </ul>
@@ -2303,20 +2303,20 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
                                 </ul>
                         </div>
 
-<div id="deck-5343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_5_deck-5.svg"></div>
-<div id="deck-6343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_6_beethoven.svg"></div>
-<div id="deck-7343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_7_verdi.svg"></div>
-<div id="deck-8343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_8_deck-8.svg"></div>
-<div id="deck-9343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_9_deck-9.svg"></div>
-<div id="deck-10343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_10_deck-10.svg"></div>
-<div id="deck-11343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_11_deck-11.svg"></div>
-<div id="deck-12343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_12_deck-12.svg"></div>
-<div id="deck-13343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_13_bizet_new.svg"></div>
-<div id="deck-14343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_14_tchaikovsky_new.svg"></div>
-<div id="deck-15343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_15_deck-15.svg"></div>
-<div id="deck-16343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_16_deck-16.svg"></div>
-<div id="deck-18343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_18_deck-18.svg"></div>
-<div id="deck-19343e8a3f-ae65-47e1-b7ca-fd2094cc2afa" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_19_mendelssohn.svg"></div>
+<div id="deck-5d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_5_deck-5.svg"></div>
+<div id="deck-6d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_6_beethoven.svg"></div>
+<div id="deck-7d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_7_verdi.svg"></div>
+<div id="deck-8d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_8_deck-8.svg"></div>
+<div id="deck-9d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_9_deck-9.svg"></div>
+<div id="deck-10d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_10_deck-10.svg"></div>
+<div id="deck-11d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_11_deck-11.svg"></div>
+<div id="deck-12d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_12_deck-12.svg"></div>
+<div id="deck-13d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_13_bizet_new.svg"></div>
+<div id="deck-14d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_14_tchaikovsky_new.svg"></div>
+<div id="deck-15d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_15_deck-15.svg"></div>
+<div id="deck-16d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_16_deck-16.svg"></div>
+<div id="deck-18d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_18_deck-18.svg"></div>
+<div id="deck-19d6df1491-253e-4c21-badf-90aff1ca6649" class="deck-img-svg" data-svg="/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_19_mendelssohn.svg"></div>
                     </div>
 
                 <div class="ship-static-deckplan-container">
@@ -2352,11 +2352,11 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 						INTERIOR
 					</div>
 					<ul class="categories-legend">
-							<li id="interiorea9a4158-e9e2-4fc4-ac4c-b294cfb63da2|studio-interior|#F9E5F1">
+							<li id="interior9f99900b-c677-49c0-8291-d7da3426802b|studio-interior|#F9E5F1">
 								<span style="background-color: #F9E5F1"></span>
 								Studio Interior°
 							</li>
-							<li id="interior799f7e23-f43c-482e-a3dc-ac6afb129782|deluxe-interior|#F2A9C5">
+							<li id="interior354f05e0-f9a7-4c95-afde-5e04a1ad99ad|deluxe-interior|#F2A9C5">
 								<span style="background-color: #F2A9C5"></span>
 								Deluxe Interior
 							</li>
@@ -2370,19 +2370,19 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 						Ocean View
 					</div>
 					<ul class="categories-legend">
-							<li id="ocean-viewc873fad8-396a-4fc1-96a8-058136b0cf12|junior-ocean-view-ov|#9AD0F3">
+							<li id="ocean-view5325a11e-ea5e-45d9-88e1-54ae0092407b|junior-ocean-view-ov|#9AD0F3">
 								<span style="background-color: #9AD0F3"></span>
 								Junior Ocean View with Obstructed View°°
 							</li>
-							<li id="ocean-view9d959f2d-ea5d-4c31-80ea-82a67d5edd59|junior-ocean-view|#68A4D8">
+							<li id="ocean-view13c53062-7cd2-4d4d-a8d4-f8a1b30f686f|junior-ocean-view|#68A4D8">
 								<span style="background-color: #68A4D8"></span>
 								Junior Ocean View°°
 							</li>
-							<li id="ocean-view7a8eda3c-87af-4f1e-8520-dbb393c426e9|deluxe-ocean-view|#447DBF">
+							<li id="ocean-viewf2dad4fe-0719-4793-bf15-9421039c8486|deluxe-ocean-view|#447DBF">
 								<span style="background-color: #447DBF"></span>
 								Deluxe Ocean View
 							</li>
-							<li id="ocean-view99512d2b-327f-49cb-a428-1e82f050f741|premium-ocean-view|#225397">
+							<li id="ocean-viewa4692f1e-7efa-4c99-ba31-1b67f3ebcb0c|premium-ocean-view|#225397">
 								<span style="background-color: #225397"></span>
 								Premium Ocean View
 							</li>
@@ -2396,19 +2396,19 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 						BALCONY
 					</div>
 					<ul class="categories-legend">
-							<li id="balconyf43a3865-f087-41b7-bc3d-85c3774324e0|studio-balcony|#D5E8CF">
+							<li id="balconyee8c3791-d749-49f7-a631-60496907be5f|studio-balcony|#D5E8CF">
 								<span style="background-color: #D5E8CF"></span>
 								Studio Balcony
 							</li>
-							<li id="balconycd1d29fc-af86-4a33-bfb3-d9ffbb33d131|deluxe-balcony|#4CA66F">
+							<li id="balcony0f3a6c1b-a883-49d9-875b-2d9097d69622|deluxe-balcony|#4CA66F">
 								<span style="background-color: #4CA66F"></span>
 								Deluxe Balcony
 							</li>
-							<li id="balcony90cedf4b-1ec6-4aba-bf0a-552395f9bd91|deluxe-balcony-with-partial-view|#4CA66F">
+							<li id="balcony3244cdcf-8cd8-414e-a039-a946d5f7f955|deluxe-balcony-with-partial-view|#4CA66F">
 								<span style="background-color: #4CA66F"></span>
 								Deluxe Balcony with partial view
 							</li>
-							<li id="balconyf57f0c35-eebc-4c99-b0c8-f71d74723499|balcony-aurea|#00443D">
+							<li id="balcony7910697d-2d6e-436c-88db-8795863083dc|balcony-aurea|#00443D">
 								<span style="background-color: #00443D"></span>
 								Deluxe Balcony Aurea
 							</li>
@@ -2422,11 +2422,11 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 						SUITE
 					</div>
 					<ul class="categories-legend">
-							<li id="suite751f90bb-a521-473e-b0f1-21b20a102cc2|premium-suite-aurea|#F49F41">
+							<li id="suite48fcca33-70a5-4c94-b109-c1eae50c466a|premium-suite-aurea|#F49F41">
 								<span style="background-color: #F49F41"></span>
 								Premium Suite Aurea
 							</li>
-							<li id="suitef032531e-db59-40b9-9d65-ecfdbcf18369|grand-suite-with-whirlpool|#EF8227">
+							<li id="suite394150b9-086c-4616-84e5-1bd931bbd338|grand-suite-with-whirlpool|#EF8227">
 								<span style="background-color: #EF8227"></span>
 								Grand Suite Aurea with terrace and whirlpool
 							</li>
@@ -2440,19 +2440,19 @@ Treat someone you love to our unique house-made gelato or sorbet. Jean-Philippe 
 						MSC YACHT CLUB
 					</div>
 					<ul class="categories-legend">
-							<li id="msc-yacht-club4d59b980-0330-4e16-8791-f2d3abec4f16|interior-suite|#D7D5D1">
+							<li id="msc-yacht-clubf408396b-5c8b-4930-968a-25b8d83084e5|interior-suite|#D7D5D1">
 								<span style="background-color: #D7D5D1"></span>
 								MSC Yacht Club Interior Suite
 							</li>
-							<li id="msc-yacht-clubbadb0a11-e3ea-4599-b9b9-270a3f4a7175|deluxe-suite|#CDC9BA">
+							<li id="msc-yacht-club7d4c4399-6895-4a4b-9f92-79ca627df9be|deluxe-suite|#CDC9BA">
 								<span style="background-color: #CDC9BA"></span>
 								MSC Yacht Club Deluxe Suite
 							</li>
-							<li id="msc-yacht-clubcc911fd9-c6ad-4242-b1d6-783bc4bc83d8|duplex-suite|#796C5D">
+							<li id="msc-yacht-clubbc88d0f1-040b-450a-82e1-27f0d4eaa164|duplex-suite|#796C5D">
 								<span style="background-color: #796C5D"></span>
 								MSC Yacht Club Duplex Suite with whirlpool
 							</li>
-							<li id="msc-yacht-club5668a197-8ab0-4e32-8c16-b1e1e259ad77|royal-suite|#61564A">
+							<li id="msc-yacht-club6d4f33da-c8a7-4081-8d78-880421819f1a|royal-suite|#61564A">
 								<span style="background-color: #61564A"></span>
 								MSC Yacht Club Royal Suite
 							</li>
@@ -2616,12 +2616,12 @@ Ship configuration, data and descriptions may be subject to change depending on 
             
 
 
-<form action="/int/forms/newsletter-sign-up" method="get" id="newsletterWidget-FABE40CE02324F829F42EC99AEE674A9" novalidate>
+<form action="/int/forms/newsletter-sign-up" method="get" id="newsletterWidget-079DDFA9F0AA4EA8B25D3945FD4F5B3C" novalidate>
         <label for="your-email">Subscribe to our newsletter to receive personalised offers and news</label>
         <div>
             <img src="/int/-/media/project/commonb2c/subscription-envelope.png?h=24&amp;iar=0&amp;w=24&amp;hash=9D96D7EA3FA70F0F239F13C2F5A228A2" alt="An&#32;envelope&#32;icon&#32;representing&#32;email&#32;communication&#32;|&#32;MSC&#32;Cruises" width="24" height="24" disablewebedit="False" title="An&#32;envelope&#32;icon&#32;representing&#32;email&#32;communication&#32;|&#32;MSC&#32;Cruises">
-            <input title="Please fill out this field" type="email" name="" id="your-email-FABE40CE02324F829F42EC99AEE674A9" required placeholder="Insert your email address">
-            <button type="submit" class="button " data-url="/int/forms/newsletter-sign-up" id="emailbutton-FABE40CE02324F829F42EC99AEE674A9"  data-tracking="true" data-tracking-type="interaction" data-tracking-event="eventGA" data-tracking-category="newsletter" data-tracking-action="subscribe" data-tracking-label="Homepage" data-tracking-value="0" data-tracking-noninteraction="">send</button>
+            <input title="Please fill out this field" type="email" name="" id="your-email-079DDFA9F0AA4EA8B25D3945FD4F5B3C" required placeholder="Insert your email address">
+            <button type="submit" class="button " data-url="/int/forms/newsletter-sign-up" id="emailbutton-079DDFA9F0AA4EA8B25D3945FD4F5B3C"  data-tracking="true" data-tracking-type="interaction" data-tracking-event="eventGA" data-tracking-category="newsletter" data-tracking-action="subscribe" data-tracking-label="Homepage" data-tracking-value="0" data-tracking-noninteraction="">send</button>
         </div>
 </form>
 <script>
@@ -3208,14 +3208,14 @@ Thank you for visiting our site and we look forward to seeing you on board soon!
 
 <script>
     BrowserCompatibility = "firefox:53,safari:600,chrome:58,edge:13,opera:55,:6";
-</script><section id="tablet-portrait-B3F75E05C942453B95C1440E87D80436" data-tablet-portrait class="hidden">
+</script><section id="tablet-portrait-1CEF4CD3A5C742DA959EE929CC8A256A" data-tablet-portrait class="hidden">
     <div class="modal-mask">
         <div class="modal-wrapper">
             <div class="modal-container">
                 <div class="modal-header tablet-portrait__header">
                     <span class="h2">Rotate your device!</span>
 
-                    <button id="tablet-portrait-close-B3F75E05C942453B95C1440E87D80436"
+                    <button id="tablet-portrait-close-1CEF4CD3A5C742DA959EE929CC8A256A"
                             type="button"
                             class="close" data-tablet-portrait-close>
                         <svg fill="none" height="24" stroke="#ff690e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24">

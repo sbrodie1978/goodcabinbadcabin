@@ -1,0 +1,21 @@
+{
+ "slug": "msc-orchestra",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/a9---summer-22/or_05_pianoforte_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/a9---summer-22/or_06_violino.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_07_saxofono_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/a9---summer-22/or_08_arpa_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/a9---summer-22/or_09_viola_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/a9---summer-22/or_10_lira_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_11_flauto_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_12_clarinetto_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_13_mandolino_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_14_chitarra_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_15_xilofono_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/orchestra/interactive-deckplan/from-march-2027/or_16_sport_wi26_27.svg"
+ ],
+ "deck_files": 12,
+ "cabin_decks": 8,
+ "cabins": 1280
+}

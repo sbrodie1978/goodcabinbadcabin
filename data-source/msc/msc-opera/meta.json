@@ -1,0 +1,18 @@
+{
+ "slug": "msc-opera",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_05_aida.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_06_otello.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_07_rigoletto_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_08_la_traviata_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_09_norma_v4.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_10_turandot_v4.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_11_tosca.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_12_la_boheme_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/opera/interactive-deckplan/a9---summer-22/ox_13_minigolf.svg"
+ ],
+ "deck_files": 9,
+ "cabin_decks": 5,
+ "cabins": 1081
+}

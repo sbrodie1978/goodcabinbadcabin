@@ -1,0 +1,18 @@
+{
+ "slug": "msc-sinfonia",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_5_beethoven.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_6_mozart.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_7_brahms.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_8_bach.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_9_tchaikovsky.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_10_sibelius.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_11_debussy.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_12_bizet.svg",
+  "/int/-/media/global-contents/ships/fleet/sinfonia/interactive-deckplan/a9---summer-22/deck_13_schubert.svg"
+ ],
+ "deck_files": 9,
+ "cabin_decks": 5,
+ "cabins": 986
+}

@@ -1,0 +1,25 @@
+{
+ "slug": "msc-seaview",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_04_baltic.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_05_mediterranean_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_06_pacific.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_07_indian_ocean.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_08_atlantic.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/sv_09_tyrrhenian_s25.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_10_adriatic_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_11_black_sea_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_12_balearic_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_13_ionian_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_14_yellow_sea_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_15_aegean_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_16_red_sea.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_18_caribbean.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_19_coral_sea.svg",
+  "/int/-/media/global-contents/ships/fleet/seaview/interactive-deckplan/a9---summer-22/sv_20_sun_deck.svg"
+ ],
+ "deck_files": 16,
+ "cabin_decks": 10,
+ "cabins": 2101
+}

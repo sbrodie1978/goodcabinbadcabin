@@ -2,12 +2,173 @@
  "unpacked_from": "/Users/stuartbrodie/Downloads",
  "ships": [
   {
+   "slug": "msc-armonia",
+   "deck_files": 9,
+   "cabin_decks": 5,
+   "cabins": 981,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-bellissima",
+   "deck_files": 14,
+   "cabin_decks": 11,
+   "cabins": 2256,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-divina",
+   "deck_files": 13,
+   "cabin_decks": 9,
+   "cabins": 1760,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-euribia",
+   "deck_files": 14,
+   "cabin_decks": 11,
+   "cabins": 2438,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-fantasia",
+   "deck_files": 13,
+   "cabin_decks": 12,
+   "cabins": 1659,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-grandiosa",
+   "deck_files": 14,
+   "cabin_decks": 11,
+   "cabins": 2442,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-lirica",
+   "deck_files": 9,
+   "cabin_decks": 5,
+   "cabins": 998,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-magnifica",
+   "deck_files": 10,
+   "cabin_decks": 7,
+   "cabins": 1053,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-meraviglia",
+   "deck_files": 14,
+   "cabin_decks": 11,
+   "cabins": 2264,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-musica",
+   "deck_files": 12,
+   "cabin_decks": 8,
+   "cabins": 1241,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-opera",
+   "deck_files": 9,
+   "cabin_decks": 5,
+   "cabins": 1081,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-orchestra",
+   "deck_files": 12,
+   "cabin_decks": 8,
+   "cabins": 1280,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-poesia",
+   "deck_files": 11,
+   "cabin_decks": 7,
+   "cabins": 1013,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-preziosa",
+   "deck_files": 13,
+   "cabin_decks": 9,
+   "cabins": 1777,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-seascape",
+   "deck_files": 15,
+   "cabin_decks": 11,
+   "cabins": 2284,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-seashore",
+   "deck_files": 15,
+   "cabin_decks": 11,
+   "cabins": 2284,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-seaside",
+   "deck_files": 15,
+   "cabin_decks": 10,
+   "cabins": 2036,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-seaview",
+   "deck_files": 16,
+   "cabin_decks": 10,
+   "cabins": 2101,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-sinfonia",
+   "deck_files": 9,
+   "cabin_decks": 5,
+   "cabins": 986,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-splendida",
+   "deck_files": 13,
+   "cabin_decks": 9,
+   "cabins": 1649,
+   "bundles": 1
+  },
+  {
    "slug": "msc-virtuosa",
    "deck_files": 14,
    "cabin_decks": 11,
    "cabins": 2437,
+   "bundles": 2
+  },
+  {
+   "slug": "msc-world-america",
+   "deck_files": 16,
+   "cabin_decks": 12,
+   "cabins": 2636,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-world-asia",
+   "deck_files": 16,
+   "cabin_decks": 12,
+   "cabins": 2608,
+   "bundles": 1
+  },
+  {
+   "slug": "msc-world-europa",
+   "deck_files": 15,
+   "cabin_decks": 12,
+   "cabins": 2648,
    "bundles": 1
   }
  ],
- "total_cabins": 2437
+ "total_cabins": 43912
 }

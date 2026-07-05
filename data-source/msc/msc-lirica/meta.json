@@ -1,0 +1,18 @@
+{
+ "slug": "msc-lirica",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_05_verdi.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_06_puccini.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_07_scarlatti_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_08_paganini_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_09_albinoni_v4.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_10_bellini_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_11_vivaldi.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_12_rossini.svg",
+  "/int/-/media/global-contents/ships/fleet/lirica/interactive-deckplan/a9---summer-22/lx_13_minigolf.svg"
+ ],
+ "deck_files": 9,
+ "cabin_decks": 5,
+ "cabins": 998
+}

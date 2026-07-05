@@ -1,0 +1,22 @@
+{
+ "slug": "msc-preziosa",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_05_corallo_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_06_diamante.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_07_rubino.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_08_onice_v4.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_09_agata_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_10_tormalina_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_11_giada_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_12_opale_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_13_ametista_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_14_smeraldo.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_15_cristallo.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_16_acquamarina.svg",
+  "/int/-/media/global-contents/ships/fleet/preziosa/interactive-deckplan/a9---summer-22/pr_18_topazio.svg"
+ ],
+ "deck_files": 13,
+ "cabin_decks": 9,
+ "cabins": 1777
+}

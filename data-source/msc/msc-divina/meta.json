@@ -1,0 +1,22 @@
+{
+ "slug": "msc-divina",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_05_saturno.svg?sc_lang=en-150&hash=72D217067CEF829479B5D55FB9DC286F",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_06_zeus.svg?sc_lang=en-150&hash=6A4E704AAF2DDD06C12B4A77636ADE18",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_07_apollo.svg?sc_lang=en-150&hash=1865E292A0724D5C13AB71DA978CE664",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_08_artemide.svg?sc_lang=en-150&hash=9CD6178B182A83ED8E8F4BB5B0C989D9",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_09_minerva.svg?sc_lang=en-150&hash=A1B7AAEE86B1F0BE9061E2C3E393F945",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_10_giunone.svg?sc_lang=en-150&hash=133834FDCF3E02176B72C06D132AE003",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_11_iride.svg?sc_lang=en-150&hash=8EE611BFDE99E549DC8FDA55EE3B5C9B",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_12_aurora.svg?sc_lang=en-150&hash=0B747AAD21BC50F956E19F13135B0D9D",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_13_cupido.svg?sc_lang=en-150&hash=C19CC31680DA3A91146AF90F88B99114",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_14_afrodite.svg?sc_lang=en-150&hash=67C122252EC09C0DC07ED43F2CC18B95",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_15_mercurio.svg?sc_lang=en-150&hash=0ACA89E98B2DFCD849AFE6AC843A3349",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_16_urano.svg?sc_lang=en-150&hash=F2C24D615379FEBAE5EB2B99E07ACE2B",
+  "/int/-/media/global-contents/ships/fleet/divina/interactive-deckplan/a9---summer-22/deck_18_elios.svg?sc_lang=en-150&hash=5162DE7F3872EA6D8AA28DE6AFACAC30"
+ ],
+ "deck_files": 13,
+ "cabin_decks": 9,
+ "cabins": 1760
+}

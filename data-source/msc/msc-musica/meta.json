@@ -1,0 +1,21 @@
+{
+ "slug": "msc-musica",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/a9---summer-22/mu_05_grazioso_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/a9---summer-22/mu_06_brillante.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_07_maestoso_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/a9---summer-22/mu_08_forte_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/a9---summer-22/mu_09_intermezzo_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/a9---summer-22/mu_10_minuetto_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_11_adagio_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_12_virtuoso_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_13_vivace_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_14_capriccio_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_15_cantata_wi26_27.svg",
+  "/int/-/media/global-contents/ships/fleet/musica/interactive-deckplan/winter-26/mu_16_sport_wi26_27.svg"
+ ],
+ "deck_files": 12,
+ "cabin_decks": 8,
+ "cabins": 1241
+}

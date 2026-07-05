@@ -1,0 +1,24 @@
+{
+ "slug": "msc-seascape",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_05.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_06.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_07_mykonos_new.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_08_ocean_cay_new.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/sc_09_gozo_s25.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_10.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_11.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_12.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_13.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_14.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_15.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_16.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_18.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_19.svg",
+  "/int/-/media/global-contents/ships/fleet/seascape/interactive-deckplan/o1---winter-22-23/sc_deck_20.svg"
+ ],
+ "deck_files": 15,
+ "cabin_decks": 11,
+ "cabins": 2284
+}

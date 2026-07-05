@@ -1,0 +1,23 @@
+{
+ "slug": "msc-bellissima",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_05_opera.svg?sc_lang=en-150&hash=5D3A9A2CCAAF5874C2A91EE5D89A7C94",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_06_musica.svg?sc_lang=en-150&hash=9721CA0765243DC73632A96384D922AA",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_07_fantasia.svg?sc_lang=en-150&hash=5ECF59D8743F0CE80A3251BE6BF5B828",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_08_meraviglia.svg?sc_lang=en-150&hash=D0A24D0CC29935475C5576EAC4806AFA",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_09_seaside.svg?sc_lang=en-150&hash=24D3362DA4F7CAD3E8E598F61822EC90",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_10_seaside_evo.svg?sc_lang=en-150&hash=F5CF07D045A80CD3503B6306BF6F31DF",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_11_bellissima.svg?sc_lang=en-150&hash=5BCD178BA20C431FD0B49F586FBFCE58",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_12_grandiosa.svg?sc_lang=en-150&hash=425C279F1B9672392C9D343E762DE3C4",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/be_13_magnifica_new.svg",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/be_14_world_class_new.svg",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_15_preziosa.svg?sc_lang=en-150&hash=DF286024A3533B4D7A878CBBDDCF2A59",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_16_seaview.svg?sc_lang=en-150&hash=6B6B99433154E45FAB4330552E640963",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_18_divina.svg?sc_lang=en-150&hash=8C5933EBFB3D04F5C41123BC533F5DAA",
+  "/int/-/media/global-contents/ships/fleet/bellissima/interactive-deckplan/a8---winter-22-23/deck_19_splendida.svg?sc_lang=en-150&hash=3C696CDCF284BA6ED8759A1BC04E96F9"
+ ],
+ "deck_files": 14,
+ "cabin_decks": 11,
+ "cabins": 2256
+}

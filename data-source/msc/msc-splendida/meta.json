@@ -1,0 +1,22 @@
+{
+ "slug": "msc-splendida",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_05_canaletto_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_06_modigliani.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_07_tiziano.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_08_giotto_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_09_tintoretto_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_10_botticelli_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_11_caravaggio_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_12_de_chirico_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_13_piero_della_francesca_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_14_raffaello.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_15_leonardo_da_vinci.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_16_michelangelo.svg",
+  "/int/-/media/global-contents/ships/fleet/splendida/interactive-deckplan/a9-summer-22/sp_18_sundeck.svg"
+ ],
+ "deck_files": 13,
+ "cabin_decks": 9,
+ "cabins": 1649
+}

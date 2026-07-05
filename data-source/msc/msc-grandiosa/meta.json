@@ -1,0 +1,23 @@
+{
+ "slug": "msc-grandiosa",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_5_caravaggio.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_6_leonardo-da-vinci.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_7_michelangelo.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_8_monet.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_9_van-gogh.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_10_miro.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_11_dali.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_12_raffaello.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/gr_13_goya_new.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/gr_14_magritte_new.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_15_cezanne.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_16_velazquez.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_18_gauguin.svg",
+  "/int/-/media/global-contents/ships/fleet/grandiosa/interactive-deckplan/a9---summer-22/deck_19_degas.svg"
+ ],
+ "deck_files": 14,
+ "cabin_decks": 11,
+ "cabins": 2442
+}

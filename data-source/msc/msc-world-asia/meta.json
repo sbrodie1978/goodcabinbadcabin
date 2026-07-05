@@ -1,0 +1,25 @@
+{
+ "slug": "msc-world-asia",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_05.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_06.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_07.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_08.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_09.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_10.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_11.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_12.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_14.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_15.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_16.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_18.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_19.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_20.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_21.svg",
+  "/int/-/media/global-contents/ships/fleet/world-asia/deckplans/as_deck_22.svg"
+ ],
+ "deck_files": 16,
+ "cabin_decks": 12,
+ "cabins": 2608
+}

@@ -1,0 +1,23 @@
+{
+ "slug": "msc-euribia",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_05_v2.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_06_v1.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_07_v1.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_08_marion_island.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_09_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_10_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_11_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_12_v3.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_13_zakynthos_new.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_14_golfe_du_morbihan_new.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_15_v1.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_16_v1.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_18_v1.svg",
+  "/int/-/media/global-contents/ships/fleet/euribia/interactive-deckplan/o2---summer-23/er_19_v1.svg"
+ ],
+ "deck_files": 14,
+ "cabin_decks": 11,
+ "cabins": 2438
+}
