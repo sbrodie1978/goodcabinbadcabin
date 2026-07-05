@@ -66,7 +66,7 @@ CLASS_ZONES = {
         18: [(0.13, 0.18, "dining", "MSC Yacht Club Restaurant"),
              (0.30, 0.42, "open_deck", "Sliding roof / open deck"),
              (0.58, 0.66, "venue_entertainment", "Sky Lounge"),
-             (0.70, 0.88, "venue_entertainment", "Kids complex: Doremiland, clubs, Teens"),
+             (0.70, 0.88, "kids_play", "Kids complex: Doremiland, clubs, Teens"),
              (0.88, 1.00, "open_deck", "Horizon Bar / Sun Deck")],
         19: [(0.13, 0.30, "pool_deck", "Yacht Club pool, grill, sundeck, whirlpool"),
              (0.58, 0.64, "open_deck", "Top 19 Exclusive Solarium"),
@@ -107,7 +107,7 @@ CLASS_ZONES = {
              (0.87, 0.92, "public_general", "Panoramic lift / Bridge of Sighs")],
         18: [(0.14, 0.19, "dining", "MSC Yacht Club Restaurant"),
              (0.42, 0.56, "pool_deck", "Jungle Pool (Magnodome), Lounge & Bar"),
-             (0.58, 0.74, "venue_entertainment", "Forest Aquaventure Park + kids clubs (Doremi, Teen, Young)")],
+             (0.58, 0.74, "kids_play", "Forest Aquaventure Park + kids clubs (Doremi, Teen, Young)")],
         19: [(0.14, 0.33, "pool_deck", "Yacht Club Sundeck, Grill & Bar, Pool, whirlpools"),
              (0.33, 0.38, "public_general", "Aurea Bar"),
              (0.38, 0.56, "open_deck", "Top 19 Exclusive Solarium / sun deck"),
@@ -150,7 +150,7 @@ CLASS_ZONES = {
              (0.76, 0.82, "public_general", "Sky Bar / Bridge of Sighs")],
         18: [(0.15, 0.20, "dining", "MSC Yacht Club Restaurant"),
              (0.43, 0.52, "pool_deck", "Jungle Pool Lounge (upper)"),
-             (0.52, 0.64, "venue_entertainment", "Kids clubs: Doremi, Mini, Junior, Teen / The Studio"),
+             (0.52, 0.64, "kids_play", "Kids clubs: Doremi, Mini, Junior, Teen / The Studio"),
              (0.64, 0.75, "venue_entertainment", "Pirates Cove Aquapark / Hall of Games"),
              (0.82, 0.90, "pool_deck", "Long Island Pool (aft)")],
         19: [(0.12, 0.17, "pool_deck", "Yacht Club sundeck / whirlpools (VERIFY extent)"),
@@ -165,11 +165,34 @@ CLASS_ZONES = {
     # the same render-and-ruler method.
 }
 
-# MSC house rules (applied by the scorer; agreed with Stuart)
-# - yacht_club_floor: YC-group cabins get a strong convenience floor — the
-#   enclave is self-contained (restaurant, lounge, pool, concierge), so
-#   distance to main venues barely matters.
-# - aurea_spa_bonus: Aurea-group cabins gain convenience from spa proximity.
-# - promenade_view: cabins overlooking indoor promenades (World PR*,
-#   Meraviglia Galleria-adjacent) take an evening-noise penalty at the
-#   quiet axis, flagged in the cabin note.
+# MSC house rules (applied by the scorer; agreed with Stuart 5 Jul 2026)
+#
+# Q&A pass on the Meraviglia draft settled five calls that apply to ALL classes:
+#   1. Indoor promenade/Galleria = venue_entertainment (loud late). CONFIRMED.
+#   2. Casino noise travels to the deck above. CONFIRMED (keep casino penalty).
+#   3. Differentiate the two Yacht Club decks: the YC pool deck sits directly
+#      above the upper YC cabin deck, so those cabins take the pool_deck-above
+#      penalty; the lower YC cabin deck (under the YC restaurant) does not.
+#      CONFIRMED — handled by the normal above/below zone stack now that the
+#      deck-19 pool zones are mapped, not a special case.
+#   4. Kids-complex noise is daytime, not evening — score it SOFTER than a
+#      nightlife venue. -> kids_play venue class below.
+#   5. The Yacht Club convenience floor is STRONGER than the Princess suite
+#      floor. -> YC_CONV_FLOOR below.
+
+# Noise penalty by venue class for a cabin on the deck directly above/below
+# (mirrors Princess ZONE_PEN; scorer applies above and below separately).
+ZONE_PEN = {
+    "pool_deck":           {"above": 22, "below": 6},
+    "galley_buffet":       {"above": 16, "below": 10},
+    "venue_entertainment": {"above": 20, "below": 14},
+    "kids_play":           {"above": 10, "below": 6},   # rule 4: daytime, softer
+    "dining":              {"above": 8,  "below": 5},
+    "public_general":      {"above": 5,  "below": 3},
+    "open_deck":           {"above": 8,  "below": 2},
+    "crew_service":        {"above": 10, "below": 6},
+}
+
+# Convenience floors / bonuses by cabin group (rule 5).
+YC_CONV_FLOOR = 72        # msc-yacht-club / msc-yc / yc-* groups (> Princess ~60)
+AUREA_SPA_BONUS = 8       # aurea-group cabins gain convenience near the spa
