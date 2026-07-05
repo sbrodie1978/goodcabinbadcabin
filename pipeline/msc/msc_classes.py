@@ -35,6 +35,9 @@ CLASS_VENUE_DECKS = {
     "seaside-evo": {"buffet": 16, "pool": 18, "hub": 6,  # hub = Times Square
                    "theatre": 6, "casino": 7, "spa": 8,
                    "lift_b": [0.34, 0.64]},
+    "world":      {"buffet": 16, "pool": 16, "hub": 6,   # hub = World Galleria/Luna Park
+                   "theatre": 6, "casino": 7, "spa": 8,
+                   "lift_b": [0.60, 0.68]},              # panoramic lift banks sit aft
 }
 
 # Per class, per public deck: list of (b0, b1, venue_class, name)
@@ -161,8 +164,54 @@ CLASS_ZONES = {
         20: [(0.20, 0.35, "open_deck", "Sun deck (fwd)"),
              (0.60, 0.76, "venue_entertainment", "Sports court / waterslides")],
     },
-    # lirica / musica / fantasia / world: to be read from their PDFs with
-    # the same render-and-ruler method.
+    "world": {
+        4:  [(0.25, 0.32, "public_general", "Medical Centre"),
+             (0.28, 0.62, "public_general", "Passenger embarkation (fwd + mid)"),
+             (0.00, 1.00, "crew_service", "Crew / service deck")],
+        5:  [(0.55, 0.85, "dining", "La Voglia / main restaurant (lower)"),
+             (0.85, 1.00, "crew_service", "Galley / crew (aft)")],
+        6:  [(0.13, 0.22, "venue_entertainment", "World Theatre"),
+             (0.28, 0.55, "venue_entertainment", "MSC Luna Park Arena, Bike Adventours, Games Arcade, 5D Cinema"),
+             (0.40, 0.55, "venue_entertainment", "World Galleria promenade (shops, bars)"),
+             (0.58, 0.66, "public_general", "World Galleria / MSC Excursions / Foundation"),
+             (0.70, 0.90, "dining", "Eugenio / Hexagon / Bubbles restaurants"),
+             (0.90, 0.98, "venue_entertainment", "Panorama Lounge")],
+        7:  [(0.13, 0.22, "venue_entertainment", "World Theatre (upper)"),
+             (0.30, 0.55, "dining", "Kaito Teppanyaki/Sushi, Butcher's Cut, TV Studio Bar, Masters of the Sea"),
+             (0.55, 0.60, "public_general", "MSC Foundation / The Hub / shop"),
+             (0.72, 0.88, "venue_entertainment", "MSC Signature Casino"),
+             (0.88, 0.97, "venue_entertainment", "Panorama Lounge (upper)")],
+        8:  [(0.18, 0.28, "public_general", "MSC Aurea Spa"),
+             (0.30, 0.40, "dining", "Les Doges / Zen-Jaive Bar / The Gin Alchemist"),
+             (0.45, 0.62, "dining", "Chef's Garden Kitchen, Elixir Mixology, Raj Polo Tea House, Champagne Bar"),
+             (0.62, 0.90, "venue_entertainment", "World Promenade (outdoor, bars, La Piscataria, Sweet Temptations)"),
+             (0.90, 0.98, "public_general", "The Canal / The Loft Bar (aft)")],
+        # 9-15 cabin decks. NOTE (World house rule): decks 9-10 sit directly
+        # above the deck-8 World Promenade entertainment strip (b 0.62-0.90);
+        # the above/below stack handles that. PR1 promenade-view balconies
+        # (decks 10-11) open ONTO the indoor Galleria/promenade — flagged
+        # separately by the scorer's promenade_view note.
+        16: [(0.30, 0.55, "pool_deck", "Botanic Garden Pool & Bar / Le Plage"),
+             (0.60, 0.90, "galley_buffet", "Marketplace Buffet (both sides)"),
+             (0.90, 0.97, "public_general", "Panoramic lifts / Zen Bar")],
+        18: [(0.13, 0.20, "public_general", "Yacht Club: pool, sundeck (fwd, quiet enclave)"),
+             (0.30, 0.55, "pool_deck", "Botanic Garden Pool / La Plage (upper)"),
+             (0.55, 0.62, "venue_entertainment", "Rive Gauche / Rive Droite bars"),
+             (0.68, 0.88, "galley_buffet", "Mercato Buffet (both sides)"),
+             (0.90, 0.98, "pool_deck", "Zen Pool & Bar (aft)")],
+        19: [(0.13, 0.30, "public_general", "Top Sail Lounge (Yacht Club, quiet)"),
+             (0.55, 0.75, "kids_play", "Kids: Mini/Junior/Teen Club, Hall of Games, Doremi Studio"),
+             (0.75, 0.90, "galley_buffet", "La Brasserie buffet")],
+        20: [(0.14, 0.26, "dining", "MSC Yacht Club Restaurant"),
+             (0.28, 0.34, "open_deck", "Top 20 Exclusive Solarium"),
+             (0.58, 0.66, "public_general", "MSC Gym"),
+             (0.66, 0.90, "venue_entertainment", "MSC Sportplex, Aurora Aquapark, Venom Drop slide, Box Bar")],
+        21: [(0.14, 0.24, "pool_deck", "MSC Yacht Club Sundeck, Grill & Bar, Lanai"),
+             (0.60, 0.90, "open_deck", "Aquapark upper / sports (open)")],
+        22: [(0.14, 0.22, "pool_deck", "MSC Yacht Club Sundeck & Pool (top)")],
+    },
+    # lirica / musica / fantasia: to be read from their PDFs with the same
+    # render-and-ruler method.
 }
 
 # MSC house rules (applied by the scorer; agreed with Stuart 5 Jul 2026)
