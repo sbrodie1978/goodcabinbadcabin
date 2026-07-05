@@ -129,6 +129,22 @@ via PDF and add an alias); a handful of fill-less/white cabins per ship
 (likely unsellable); within-group sibling ambiguity (deluxe-balcony vs
 partial-view; YC suite variants) is benign for scoring.
 
+## Geometry frame (in parse_svgs.py)
+
+All decks of a ship share ONE drawing frame (single viewBox + hull box per
+ship, verified fleet-wide) — no per-deck alignment needed. Every file carries
+a `#ship`/`#ingombro` hull layer; the ship-level hull box gives bow→stern
+`b` (0=bow, 1=stern). **Bow = right in every file**: cabin numbers ascend
+bow→stern with 100% per-deck consistency, and the Virtuosa deck-5 render
+confirms it visually. Sides: odd cabin numbers sit in the top lane
+everywhere; a bird's-eye plan with bow right puts port at the top, so
+**odd = Port, even = Starboard** (geometric derivation — not yet verified
+against a real onboard photo; flag if contradicted). Duplicate SVG ids
+(`cabin10008_1_`, Illustrator suffixes on World ships) are one cabin drawn
+as multiple shapes — canonicalised and merged by union bbox. The `#icons`
+layer (per-cabin markers, id `icon<num>`) is captured with positions; icon
+*type* decoding (accessible/whirlpool/obstructed) is still to do.
+
 ## Open questions / next steps
 
 1. Legend extraction: finalise the colour→category parser against the saved

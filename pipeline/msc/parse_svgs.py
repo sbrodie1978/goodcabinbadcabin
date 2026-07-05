@@ -109,6 +109,30 @@ def nearest_legend(fill, legend, maxdist=42):
     return best
 
 
+def hull_bbox(root):
+    hull = None
+    for e in root.iter():
+        if e.get("id") in ("ship", "ingombro"):
+            hull = e
+            break
+    if hull is None:
+        return None
+    xs, ys = [], []
+    for e in hull.iter():
+        if localname(e.tag) == "rect":
+            x, y = float(e.get("x", 0)), float(e.get("y", 0))
+            w, h = float(e.get("width", 0)), float(e.get("height", 0))
+            xs += [x, x + w]; ys += [y, y + h]
+        if localname(e.tag) == "line":
+            xs += [float(e.get("x1", 0)), float(e.get("x2", 0))]
+            ys += [float(e.get("y1", 0)), float(e.get("y2", 0))]
+        for attr in ("points", "d"):
+            if e.get(attr):
+                n = [float(v) for v in NUM_TOKEN.findall(e.get(attr))]
+                xs += n[0::2]; ys += n[1::2]
+    return (min(xs), max(xs), min(ys), max(ys)) if xs else None
+
+
 def deck_number(fname):
     m = DECKNUM_RE.search(fname)
     return int(m.group(1)) if m else None
@@ -119,6 +143,8 @@ def parse_ship(slug, class_legend=None):
     html = open(os.path.join(ship_dir, "page.html"), encoding="utf-8", errors="replace").read()
     legend = parse_legend(html)
     cabins, decks = [], {}
+    all_decks, icons = {}, []
+    hull_frames = []
     unknown_fills = {}
     for fname in sorted(os.listdir(os.path.join(ship_dir, "svg"))):
         deck = deck_number(fname)
@@ -127,12 +153,26 @@ def parse_ship(slug, class_legend=None):
         except ET.ParseError as e:
             print("  ! %s/%s: XML parse error: %s" % (slug, fname, e))
             continue
+        hb = hull_bbox(root)
+        if hb:
+            hull_frames.append(hb)
+        all_decks[str(deck)] = fname
+        # icons layer (accessible / obstructed / whirlpool markers etc.)
+        for el in root.iter():
+            iid = el.get("id", "")
+            if iid.startswith("icon") and localname(el.tag) != "g":
+                bb = bbox_of(el)
+                if bb:
+                    icons.append({"id": iid, "deck": deck,
+                                  "x": round(bb[0] + bb[2] / 2, 2),
+                                  "y": round(bb[1] + bb[3] / 2, 2)})
         n_before = len(cabins)
         for el in root.iter():
             eid = el.get("id", "")
             if not eid.startswith("cabin") or localname(el.tag) == "g":
                 continue
-            num = eid[5:]
+            m = re.match(r"_?(\d+)", eid[5:])
+            num = m.group(1) if m else eid[5:]
             bb = bbox_of(el)
             if bb is None:
                 continue
@@ -152,8 +192,30 @@ def parse_ship(slug, class_legend=None):
                            "fill": fill, "cats": cats, "grp": grps})
         if len(cabins) > n_before:
             decks[str(deck)] = fname
-    return {"slug": slug, "legend": legend, "decks": decks,
-            "cabins": cabins, "unknown_fills": unknown_fills}
+    # merge duplicate shapes for the same (file, num): union bbox, keep any category found
+    merged = {}
+    for c in cabins:
+        k = (c["file"], c["num"])
+        if k in merged:
+            m = merged[k]
+            x1 = min(m["x"], c["x"]); y1 = min(m["y"], c["y"])
+            x2 = max(m["x"] + m["w"], c["x"] + c["w"]); y2 = max(m["y"] + m["h"], c["y"] + c["h"])
+            m.update({"x": x1, "y": y1, "w": round(x2 - x1, 2), "h": round(y2 - y1, 2)})
+            if not m["cats"] and c["cats"]:
+                m.update({"fill": c["fill"], "cats": c["cats"], "grp": c["grp"]})
+        else:
+            merged[k] = c
+    cabins = list(merged.values())
+    # ship-level frame (all decks share one drawing frame; verified fleet-wide)
+    if hull_frames:
+        hx0 = min(h[0] for h in hull_frames); hx1 = max(h[1] for h in hull_frames)
+        for c in cabins:
+            cx = c["x"] + c["w"] / 2
+            c["b"] = round(1.0 - (cx - hx0) / (hx1 - hx0), 4)  # bow = right, fleet-verified
+    for c in cabins:
+        c["side"] = ("P" if int(c["num"]) % 2 else "S") if c["num"].isdigit() else None
+    return {"slug": slug, "legend": legend, "decks": decks, "all_decks": all_decks,
+            "icons": icons, "cabins": cabins, "unknown_fills": unknown_fills}
 
 
 def main():
