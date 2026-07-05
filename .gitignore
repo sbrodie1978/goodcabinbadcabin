@@ -16,3 +16,4 @@ node_modules/
 pipeline/fleet_scored.json
 pipeline/slim_fleet.json
 pipeline/fleet_meta.json
+pipeline/msc/msc_extracted.json

@@ -115,6 +115,20 @@ published by MSC; re-check and re-harvest Magnifica when it appears.
 Poesia's viewer shows no deck 11 and totals ~1,013 vs ~1,275 published —
 reconcile against the PDF during pipeline build.
 
+## Extraction (parse_svgs.py)
+
+`python3 pipeline/msc/parse_svgs.py` turns the harvested SVGs + page legends
+into `pipeline/msc/msc_extracted.json` (gitignored transient): per cabin
+number, deck, bbox geometry, fill, category slug(s) + group. Legend lis are
+machine-readable (`<li id="<group><guid>|<slug>|#HEX">`); resolution order is
+ship legend exact → ship nearest-colour (revision palette drift, e.g.
+#4CA66F/#4CA770) → pooled class legend. Status 5 Jul 2026: 97–100% of cabins
+resolve to a category group on every ship. Known residue: `#003891` (90
+cabins on each World-class ship, legend entry absent everywhere — identify
+via PDF and add an alias); a handful of fill-less/white cabins per ship
+(likely unsellable); within-group sibling ambiguity (deluxe-balcony vs
+partial-view; YC suite variants) is benign for scoring.
+
 ## Open questions / next steps
 
 1. Legend extraction: finalise the colour→category parser against the saved
