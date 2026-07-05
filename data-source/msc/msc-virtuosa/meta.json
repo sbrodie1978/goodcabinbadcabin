@@ -1,0 +1,23 @@
+{
+ "slug": "msc-virtuosa",
+ "bundles": 1,
+ "urls": [
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_5_deck-5.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_6_beethoven.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_7_verdi.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_8_deck-8.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_9_deck-9.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_10_deck-10.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_11_deck-11.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_12_deck-12.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_13_bizet_new.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/vi_14_tchaikovsky_new.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_15_deck-15.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_16_deck-16.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_18_deck-18.svg",
+  "/int/-/media/global-contents/ships/fleet/virtuosa/interactive-deckplan/a8---winter-21-22/deck_19_mendelssohn.svg"
+ ],
+ "deck_files": 14,
+ "cabin_decks": 11,
+ "cabins": 2437
+}

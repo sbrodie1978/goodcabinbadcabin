@@ -1,0 +1,13 @@
+{
+ "unpacked_from": "/Users/stuartbrodie/Downloads",
+ "ships": [
+  {
+   "slug": "msc-virtuosa",
+   "deck_files": 14,
+   "cabin_decks": 11,
+   "cabins": 2437,
+   "bundles": 1
+  }
+ ],
+ "total_cabins": 2437
+}
