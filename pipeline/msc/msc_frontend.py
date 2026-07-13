@@ -36,6 +36,11 @@ html = html.replace(
 html = html.replace(
     'const CLASSORDER=["Sphere","Royal","Grand","Coral"];',
     f'const CLASSORDER={MSC_CLASSORDER};')
+# Bump the data-version cache-buster for MSC so returning visitors' browsers
+# refetch the corrected ship + plan JSON instead of serving stale cache.
+html = html.replace(
+    'const DV = "5e98c4e40b";',
+    'const DV = "msc-20260705b";')
 
 _OUT = os.path.join(_ROOT, "app", "public", "msc", "index.html")
 os.makedirs(os.path.dirname(_OUT), exist_ok=True)
