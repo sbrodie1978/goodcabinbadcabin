@@ -64,7 +64,7 @@ for sid,name in enumerate(ORDER,1):
         data.append([r["cabin"],r["deck"],r["side"],r["b"],r["quiet"],r["stability"],
           r["convenience"],r["category"],r["category_confidence"],r["above_desc"],r["below_desc"],
           r["quiet_notes"],r["area_sqft"],r["berths"],r["category_name"],r.get("space",50),
-          "#"+r["category_color"], s])   # index 16 = own colour, 17 = surround
+          "#"+r["category_color"], s, r.get("category_class","interior")])   # 16 colour, 17 surround, 18 type
     slim.append({"id":sid,"line":f"Princess Cruises · {cls} class","name":disp,
      "spec":f"{gt} GT · {len(rows):,} STATEROOMS · OFFICIAL DATA","decks":decks,
      "numstyle":"prefix" if not rows[0]["cabin"][0].isdigit() else "sphere","data":data,"cls":cls})

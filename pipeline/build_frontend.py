@@ -234,7 +234,7 @@ footer{font-family:var(--mono);font-size:11px;color:var(--ink2);padding:18px 0 4
 
 <script>
 const SHIPS = __DATA__;
-const DV = "5e98c4e40b";  // data version — cache-busts ship JSON when the payload schema/content changes
+const DV = "princess-20260713";  // data version — cache-busts ship JSON when the payload schema/content changes
 // per ship: data rows = [num, deck, side, b, quiet, stab, conv, cat, conf, above, below, notes,
 //   sqft, berths, catname, space, colour, surround, type]  (type = core cabin type at index 18)
 const PROFILES = {
