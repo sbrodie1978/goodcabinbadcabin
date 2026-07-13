@@ -70,6 +70,76 @@ def parse_legend(html):
     return legend
 
 
+PATH_TOKEN = re.compile(r'[MmLlHhVvCcSsQqTtAaZz]|-?\d*\.?\d+(?:[eE]-?\d+)?')
+
+
+def path_bbox(d):
+    """Bounding box of an SVG path `d`. Parses commands properly (single-value
+    H/V, relative vs absolute, curves) — a naive number-pairing gives garbage
+    because H/V carry one value and scramble x/y parity."""
+    toks = PATH_TOKEN.findall(d)
+    xs, ys = [], []
+    i = 0
+    cx = cy = 0.0
+    sx = sy = 0.0
+    cmd = None
+    n = len(toks)
+
+    def take():
+        nonlocal i
+        v = float(toks[i]); i += 1
+        return v
+
+    while i < n:
+        if re.match(r'[A-Za-z]', toks[i]):
+            cmd = toks[i]; i += 1
+        if cmd in ('M', 'L'):
+            cx, cy = take(), take()
+            if cmd == 'M':
+                sx, sy = cx, cy; cmd = 'L'
+        elif cmd in ('m', 'l'):
+            cx += take(); cy += take()
+            if cmd == 'm':
+                sx, sy = cx, cy; cmd = 'l'
+        elif cmd == 'H':
+            cx = take()
+        elif cmd == 'h':
+            cx += take()
+        elif cmd == 'V':
+            cy = take()
+        elif cmd == 'v':
+            cy += take()
+        elif cmd in ('C', 'c'):
+            p = [take() for _ in range(6)]
+            if cmd == 'c':
+                p = [p[0] + cx, p[1] + cy, p[2] + cx, p[3] + cy, p[4] + cx, p[5] + cy]
+            xs += [p[0], p[2]]; ys += [p[1], p[3]]; cx, cy = p[4], p[5]
+        elif cmd in ('S', 's', 'Q', 'q'):
+            p = [take() for _ in range(4)]
+            if cmd in ('s', 'q'):
+                p = [p[0] + cx, p[1] + cy, p[2] + cx, p[3] + cy]
+            xs += [p[0]]; ys += [p[1]]; cx, cy = p[2], p[3]
+        elif cmd in ('T', 't'):
+            x, y = take(), take()
+            if cmd == 't':
+                x += cx; y += cy
+            cx, cy = x, y
+        elif cmd in ('A', 'a'):
+            p = [take() for _ in range(7)]
+            x, y = p[5], p[6]
+            if cmd == 'a':
+                x += cx; y += cy
+            cx, cy = x, y
+        elif cmd in ('Z', 'z'):
+            cx, cy = sx, sy
+        else:
+            i += 1
+        xs.append(cx); ys.append(cy)
+    if not xs:
+        return None
+    return min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)
+
+
 def bbox_of(el):
     k = localname(el.tag)
     if k == "rect":
@@ -79,7 +149,10 @@ def bbox_of(el):
             return x, y, w, h
         except (TypeError, ValueError):
             return None
-    pts = el.get("points") if k == "polygon" else el.get("d") if k == "path" else None
+    if k == "path":
+        d = el.get("d")
+        return path_bbox(d) if d else None
+    pts = el.get("points") if k in ("polygon", "polyline") else None
     if not pts:
         return None
     nums = [float(n) for n in NUM_TOKEN.findall(pts)]
@@ -196,22 +269,45 @@ def parse_ship(slug, class_legend=None):
             cabins.append({"num": num, "deck": deck, "file": fname,
                            "x": round(bb[0], 2), "y": round(bb[1], 2),
                            "w": round(bb[2], 2), "h": round(bb[3], 2),
+                           "exact": eid == "cabin" + num,
                            "fill": fill, "cats": cats, "grp": grps})
         if len(cabins) > n_before:
             decks[str(deck)] = fname
-    # merge duplicate shapes for the same (file, num): union bbox, keep any category found
-    merged = {}
+    # Combine shapes sharing a canonical number. Illustrator exports draw some
+    # cabins as multiple adjacent shapes (L-shapes) AND sometimes give a
+    # DIFFERENT cabin a duplicate id with a "_1_" suffix. Union only shapes that
+    # actually touch the anchor; a far-apart same-number shape is a mislabel and
+    # is dropped (keeping the exact-id / largest shape as the real cabin).
+    from collections import defaultdict as _dd
+    groups = _dd(list)
     for c in cabins:
-        k = (c["file"], c["num"])
-        if k in merged:
-            m = merged[k]
-            x1 = min(m["x"], c["x"]); y1 = min(m["y"], c["y"])
-            x2 = max(m["x"] + m["w"], c["x"] + c["w"]); y2 = max(m["y"] + m["h"], c["y"] + c["h"])
-            m.update({"x": x1, "y": y1, "w": round(x2 - x1, 2), "h": round(y2 - y1, 2)})
-            if not m["cats"] and c["cats"]:
-                m.update({"fill": c["fill"], "cats": c["cats"], "grp": c["grp"]})
-        else:
-            merged[k] = c
+        groups[(c["file"], c["num"])].append(c)
+
+    def _overlap(a, b, gap=6.0):
+        return not (a["x"] > b["x"] + b["w"] + gap or b["x"] > a["x"] + a["w"] + gap
+                    or a["y"] > b["y"] + b["h"] + gap or b["y"] > a["y"] + a["h"] + gap)
+
+    merged = {}
+    for key, shapes in groups.items():
+        # anchor: prefer an exact-id shape, else the largest-area shape
+        anchor = sorted(shapes, key=lambda c: (c["exact"], c["w"] * c["h"]))[-1]
+        x1, y1 = anchor["x"], anchor["y"]
+        x2, y2 = anchor["x"] + anchor["w"], anchor["y"] + anchor["h"]
+        cats, grp, fill = anchor["cats"], anchor["grp"], anchor["fill"]
+        for c in shapes:
+            if c is anchor:
+                continue
+            if _overlap(c, anchor):                       # true multi-shape cabin
+                x1 = min(x1, c["x"]); y1 = min(y1, c["y"])
+                x2 = max(x2, c["x"] + c["w"]); y2 = max(y2, c["y"] + c["h"])
+            # else: far-apart duplicate id -> ignore (mislabelled stray)
+            if not cats and c["cats"]:
+                cats, grp, fill = c["cats"], c["grp"], c["fill"]
+        anchor.update({"x": round(x1, 2), "y": round(y1, 2),
+                       "w": round(x2 - x1, 2), "h": round(y2 - y1, 2),
+                       "cats": cats, "grp": grp, "fill": fill})
+        anchor.pop("exact", None)
+        merged[key] = anchor
     cabins = list(merged.values())
     # ship-level frame (all decks share one drawing frame; verified fleet-wide)
     if hull_frames:
@@ -226,7 +322,8 @@ def parse_ship(slug, class_legend=None):
 
 
 def main():
-    slugs = sorted(d for d in os.listdir(SRC) if os.path.isdir(os.path.join(SRC, d)))
+    slugs = sorted(d for d in os.listdir(SRC)
+                   if os.path.isfile(os.path.join(SRC, d, "page.html")))
     # first pass: every ship's own legend, pooled per class for fallback
     class_legend = {}
     for slug in slugs:
